@@ -3,10 +3,12 @@
 Muslim Days অ্যাপে নোটিফিকেশন পাঠানোর admin পেজ।
 
 - **পেজ:** https://mdabarik.github.io/push-notifications/
+- **গাইড:** https://mdabarik.github.io/push-notifications/guide.html
 - **Worker:** https://push-notify.muslim-days.workers.dev
 
 ```
 index.html        admin পেজ (GitHub Pages)
+guide.html        পুশ গাইড (muslim-days/docs/firebase-push-guide.html-এর কপি)
 push-config.js    Worker-এর লিংক (পাবলিক)
 worker/           Cloudflare Worker-এর কোড
 ```

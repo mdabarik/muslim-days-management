@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muslim Days · পুশ গাইড</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3f5f9; --card: #ffffff; --ink: #1b2330; --muted: #5d6878; --line: #e3e8ef;
+    --navy: #0b2a47; --navy2: #1c5c8f; --gold: #e6b24a; --gold2: #ffd98a;
+    --blue: #2f7fd1; --amber: #d98a0b; --green: #2fae66; --purple: #7c5cd6;
+    --code: #0f172a; --code-ink: #e2e8f0; --shadow: 0 10px 30px rgba(11,42,71,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0a0f16; --card: #121a25; --ink: #e9edf3; --muted: #9aa6b5; --line: #223042; --shadow: 0 10px 30px rgba(0,0,0,.35); }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+  code { font: 13.5px ui-monospace, SFMono-Regular, Menlo, monospace; background: rgba(28,92,143,.1); color: var(--navy2); padding: 1px 6px; border-radius: 5px; }
+  @media (prefers-color-scheme: dark) { code { color: #8cc4f5; background: rgba(140,196,245,.12); } }
+
+  /* Hero */
+  .hero { background: radial-gradient(120% 140% at 0% 0%, var(--navy2) 0%, var(--navy) 55%, #06182b 100%); color: #fff; padding: 46px 0 70px; position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; right: -120px; top: -120px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(230,178,74,.28), rgba(230,178,74,0) 65%); }
+  .brand { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+  .mark { width: 58px; height: 58px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, var(--gold2), var(--gold)); box-shadow: 0 0 22px rgba(230,178,74,.4); flex: none; }
+  .mark span { display: block; width: 100%; height: 100%; border-radius: 50%; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABAKADAAQAAAABAAABAAAAAABn6hpJAAAwwElEQVR4Ae2dCbwcVZ3vq3q9+wJZSEC4IRAiyK6gj11G0CCKODAPFRxREWX5gKODT9HHOChuMzLwFDdERXgsIwiCyqIgw2IEDETWTIQACZDF5N7crfee/+9Une7q7lq679p963eSulV96pz/+f+//7PVbhgMJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACJEACdRG456azeq+44rxkXYmZqOkIwHfwYdMp1kQKmU2kS1Op8uoTlx7e3534WTGXXz80uv39iw66bHNTKUhlfAm89uf/M7+3s+cXZiy6y7bhzBmLD7j4Qd8MId0ZCandgWYnIsbRbf2dS9o7kkfk8sklgRmYoKkIwGfwHXwIXzaVck2kTKyJdGkqVVJjuZ+ktoysyBUKq1Kb//ZkUylHZQIJwGcj3cnvxsazB8KXgRmYgASqCbz+xL9cuHHVpf+rOp6/W4MAfAcftoa2s6MlZwA+3M2IGY+YxYRPkpbdte7Jf10y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KcrjBPvJ13yXygm3Cr/hU9/pTOG/pWX8RYqQSq06KgioTFiRK/hHWQexUs4AyOOL+yYTkT1dy88W/porGqtlEi7FWuWjhCAdUIY0W3X+ROCY8t6Bw+Sho3lOE7FTup6RtMUQHYBkEvbobZW1ZlFuIDowHjcXe12ptWQYo+lc4UHxOS5pPnfI+c/8s4hSnRtkhi0I1lCHyJ+v3Pvxvq7oAXJmWF6hjdHDnwfuUlNvyvVI5iUDnQAedCkFx2Ypzm8DekmenIxb0pm4poReMTxgbKd1TTTRSF2+ND2vD4jiScEY5pQTKd9hEhi6mYgGXMGwyhboJZ2zb9AyIGdwJP/EQec9c7BkCMjlK7Kld4b9EADXrtPyRhqcXa7LkXlpAHmpaI0GVOiUTN6nM+TEBnQQsxXQAHNqbJ4eDdA5pyfJUMso4HSB+H56NG0dqWHvADDvxCxeXcZqHbdR08kSwEwAvhc509srT1bRac4f9g4AJ84GM1lzm4zqdkVAnWCYuwQsN8upA1NcXr4peO4a7GtZ6DuAV7blTo9kjeR2uQ9Ajj3NKB53Z5izBPJRsyjH/8UeWQrx0luZ5qy9NMyfABu7P58w7A11HQi18Y7a7cbBLc6RhZstRsDtWN8trsXMmpy6rOT+/MjHn0+r7A19Q28VR1FPEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiCBJiTwP7rCysjHDd40AAAAAElFTkSuQmCC) center/128% no-repeat, linear-gradient(135deg, #1c5c8f, #0b2a47); }
+  .brand small { color: var(--gold2); font-weight: 600; letter-spacing: .3px; }
+  h1 { margin: 18px 0 6px; font-size: clamp(26px, 5vw, 38px); line-height: 1.25; position: relative; z-index: 1; }
+  .lead { color: #c9d6e6; max-width: 640px; margin: 0; position: relative; z-index: 1; }
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; position: relative; z-index: 1; }
+  .flow div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 12px 14px; font-size: 14.5px; }
+  .flow b { display: block; color: var(--gold2); font-size: 13px; letter-spacing: .4px; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding: 10px 16px; scrollbar-width: none; }
+  nav a { flex: none; text-decoration: none; color: var(--ink); font-size: 14.5px; font-weight: 600; padding: 6px 14px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); }
+  nav a:hover { border-color: var(--gold); }
+
+  main { margin-top: -38px; position: relative; z-index: 2; padding-bottom: 60px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); padding: 26px 24px; margin-bottom: 22px; scroll-margin-top: 70px; }
+  h2 { margin: 0 0 4px; font-size: 22px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  h3 { margin: 22px 0 8px; font-size: 16px; }
+  .sub { color: var(--muted); margin: 0 0 14px; }
+  .tag { font: 600 12.5px ui-monospace, Menlo, monospace; padding: 3px 10px; border-radius: 99px; color: #fff; }
+  .t-blue { background: var(--blue); } .t-amber { background: var(--amber); } .t-green { background: var(--green); } .t-purple { background: var(--purple); }
+  .icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 21px; flex: none; }
+  .i-blue { background: rgba(47,127,209,.14); } .i-amber { background: rgba(217,138,11,.15); } .i-green { background: rgba(47,174,102,.15); } .i-purple { background: rgba(124,92,214,.15); }
+
+  /* Type cards */
+  .types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .type { text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: 16px; padding: 14px; transition: transform .15s, border-color .15s; }
+  .type:hover { transform: translateY(-2px); border-color: var(--gold); }
+  .type b { display: block; margin-top: 8px; }
+  .type small { color: var(--muted); }
+
+  /* Tables */
+  .table { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; background: color-mix(in srgb, var(--line) 35%, transparent); }
+  td:first-child { white-space: nowrap; }
+  .need, .opt { font-size: 12.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+  .need { background: rgba(230,178,74,.18); color: #a26c00; }
+  .opt { background: color-mix(in srgb, var(--muted) 14%, transparent); color: var(--muted); }
+  @media (prefers-color-scheme: dark) { .need { color: var(--gold2); } }
+
+  /* Samples */
+  .samples { display: grid; gap: 12px; }
+  .sample { border-radius: 14px; overflow: hidden; background: var(--code); }
+  .sample-head { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; background: rgba(255,255,255,.05); color: #cbd5e1; font-size: 13.5px; font-weight: 600; }
+  .copy { border: 0; border-radius: 8px; padding: 4px 12px; cursor: pointer; font: 600 12.5px "Hind Siliguri", system-ui; color: var(--navy); background: var(--gold2); }
+  pre { margin: 0; padding: 14px 16px; overflow-x: auto; color: var(--code-ink); font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .fb { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 10px 0 18px; }
+  .fb-head { background: linear-gradient(90deg, var(--navy), var(--navy2)); color: #fff; font-weight: 700; padding: 10px 14px; }
+  .fb-group { font-size: 12.5px; font-weight: 700; color: var(--muted); padding: 8px 14px 2px; text-transform: uppercase; letter-spacing: .4px; }
+  .kv { display: grid; grid-template-columns: minmax(150px, 38%) 1fr; gap: 10px; padding: 7px 14px; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .kv b { font-weight: 600; word-break: break-all; }
+  .step { font-weight: 700; margin: 18px 0 8px; }
+  .note { border-left: 4px solid var(--gold); background: rgba(230,178,74,.1); border-radius: 0 12px 12px 0; padding: 12px 16px; margin-top: 14px; }
+  .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .steps li { counter-increment: s; display: flex; gap: 12px; align-items: flex-start; }
+  .steps li::before { content: counter(s); flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--navy); background: var(--gold2); }
+
+  /* How to send */
+  .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .way { min-width: 0; overflow-wrap: anywhere; border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .way.main { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(230,178,74,.15); }
+  .way-head { display: flex; align-items: center; gap: 10px; }
+  .way-head b { display: block; font-size: 17px; }
+  .way-head small { color: var(--muted); }
+  .way .steps li { font-size: 15px; }
+  .btn { align-self: flex-start; text-decoration: none; font-weight: 700; font-size: 14.5px; padding: 8px 16px; border-radius: 10px; color: var(--navy); background: var(--gold2); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .example { min-width: 0; text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; transition: border-color .15s; }
+  .example:hover { border-color: var(--gold); }
+  .example small { color: var(--muted); }
+  .example code { overflow-wrap: anywhere; font-size: 12.5px; }
+
+  footer { text-align: center; color: var(--muted); padding: 10px 16px 40px; font-size: 14.5px; }
+  footer b { color: var(--ink); }
+  @media (max-width: 720px) {
+    .types { grid-template-columns: repeat(2, 1fr); }
+    .flow, .ways, .examples { grid-template-columns: 1fr; }
+    section { padding: 20px 16px; border-radius: 18px; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><span></span></div>
+      <div><b>Muslim Days</b><br><small>পুশ নোটিফিকেশন গাইড</small></div>
+    </div>
+    <h1>এক JSON ফাইলেই পুরো মেসেজ</h1>
+    <p class="lead">নোটিফিকেশন বারে দেখায় Firebase-এর title, text আর image। অ্যাপের ভিতরের পেজ বা কুইজ আসে GitHub-এ রাখা JSON ফাইল থেকে, অ্যাপে যে ভাষা বাছা সেই ভাষায়।</p>
+    <div class="flow">
+      <div><b>নোটিফিকেশন বার</b>Firebase-এর title, text, image</div>
+      <div><b>অ্যাপের ভিতরে</b>json_url-এর JSON থেকে সব কিছু</div>
+      <div><b>ক্যাশ</b>push আসলেই নেমে থাকে, পরে নেট ছাড়াও খোলে</div>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#send">📤 পাঠানো</a><a href="#firebase">Firebase</a><a href="#types">ধরন</a><a href="#t1">Notification</a>
+  <a href="#t2">Reminder</a><a href="#t3">Feedback</a><a href="#t4">Quiz</a><a href="#rules">নিয়ম</a>
+</div></nav>
+
+<main class="wrap">
+  <section id="send">
+    <h2>📤 কীভাবে পাঠাবেন</h2>
+    <p class="sub">দুই উপায়ে পাঠানো যায়। Admin পেজ সহজ: JSON ফাইল বানাতে বা GitHub-এ দিতে হয় না।</p>
+    <div class="ways">
+      <div class="way main">
+        <div class="way-head"><div class="icon i-amber">🖥️</div><div><b>Admin পেজ</b><small>সহজ · সুপারিশকৃত</small></div></div>
+        <ol class="steps">
+          <li><span>পেজ খুলে admin পাসওয়ার্ড দিন। “মনে রাখো” দিলে পরে আর চাইবে না।</span></li>
+          <li><span>উপরের ট্যাবে ধরন বাছুন: Notification · Reminder · Feedback (WhatsApp / Email) · Quiz। এটাই <code>type</code>, আলাদা লিখতে হয় না।</span></li>
+          <li><span><b>✍️ ঘর পূরণ করে</b>: সব ঘর পূরণ করুন, JSON নিজে থেকেই বানায়। অথবা <b>🔗 নিজের JSON লিংক</b>: GitHub-এর ফাইলের লিংক দিন, পাঠানোর আগে যাচাই হয়।</span></li>
+          <li><span>নোটিফিকেশন বারের ঘর খালি রাখলে পেজের শিরোনাম আর লেখা থেকে নেয়।</span></li>
+          <li><span>দরকার হলে <code>full_screen</code> আর <code>return_on_close</code>-এ টিক দিন।</span></li>
+          <li><span>আগে <b>ডিবাগ ফোনে (টেস্ট)</b> পাঠান — শুধু <code>flutter run</code> করা ফোনে যায়। ঠিক থাকলে <b>সব ইউজারকে</b>।</span></li>
+        </ol>
+        <a class="btn" href="./">Admin পেজ খুলুন →</a>
+      </div>
+      <div class="way">
+        <div class="way-head"><div class="icon i-blue">🔥</div><div><b>Firebase Console</b><small>নিজে সব ঘর দিয়ে</small></div></div>
+        <ol class="steps">
+          <li><span>JSON ফাইল বানিয়ে GitHub-এ দিন (নিচের ধরন অনুযায়ী)।</span></li>
+          <li><span>Firebase Console → Messaging → New campaign → Notifications।</span></li>
+          <li><span>Notification title, text, image দিন।</span></li>
+          <li><span>Target-এ Topic <code>all</code> (সবাই) বা অ্যাপ বাছুন।</span></li>
+          <li><span>Custom data: <code>json_url</code>, <code>type</code>, দরকারে <code>full_screen</code> আর <code>return_on_close</code>।</span></li>
+          <li><span>“Send test message”-এ নিজের ফোনের FCM token দিয়ে আগে দেখুন।</span></li>
+        </ol>
+        <a class="btn ghost" href="#firebase">কোন ঘরে কী দেবেন ↓</a>
+      </div>
+    </div>
+    <h3>🔗 উদাহরণ JSON লিংক</h3>
+    <p class="sub">Admin পেজের “নিজের JSON লিংক” মোডে বা Firebase-এর <code>json_url</code>-এ এগুলো দিয়ে দেখতে পারেন। দুটোই Quiz।</p>
+    <div class="examples">
+      <a class="example" href="https://mdabarik.github.io/welldev/islamic-quiz/quiz-1.json" target="_blank" rel="noopener"><b>❓ quiz-1.json</b><small>জুমার দিনের কুইজ · ৫টি প্রশ্ন</small><code>https://mdabarik.github.io/welldev/islamic-quiz/quiz-1.json</code></a>
+      <a class="example" href="https://mdabarik.github.io/welldev/islamic-quiz/quiz-2.json" target="_blank" rel="noopener"><b>❓ quiz-2.json</b><small>নবী ও আখিরাত কুইজ · ১২টি প্রশ্ন</small><code>https://mdabarik.github.io/welldev/islamic-quiz/quiz-2.json</code></a>
+    </div>
+    <div class="note"><code>type</code>-এর আগের নাম <code>message_type</code> Firebase নেয় না। অ্যাপ ৩.০.২ বা তার আগের ভার্সনে <code>type</code> পড়ে না: সেখানে Quiz আর Notification ঠিক চলে, কিন্তু Reminder লেবেল আর Feedback বাটন দেখায় না।</div>
+  </section>
+
+  <section id="firebase">
+    <h2>🔥 Firebase Console</h2>
+    <p class="sub">শুধু এই কয়টা ঘর কাজ করে; অন্য কিছু দিলে অ্যাপ সেটা ধরে না।</p>
+    <h3>Notification</h3>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী দেবেন</th></tr></thead><tbody>
+      <tr><td>Notification title</td><td><span class="need">লাগবে</span></td><td>JSON-এর title · বারে দেখায়</td></tr>
+      <tr><td>Notification text</td><td><span class="need">লাগবে</span></td><td>ছোট লেখা, JSON-এর description থেকে · বারে দেখায়</td></tr>
+      <tr><td>Notification image</td><td><span class="opt">ঐচ্ছিক</span></td><td>JSON-এর image · বারে দেখায়</td></tr>
+      <tr><td>Android notification channel</td><td><span class="opt">ঐচ্ছিক</span></td><td><b>খালি রাখুন</b> · অ্যাপ নিজের “ঘোষণা” চ্যানেল দেয়</td></tr>
+    </tbody></table></div>
+    <h3>Custom data</h3>
+    <div class="table"><table><thead><tr><th>Key</th><th></th><th>Value</th></tr></thead><tbody>
+      <tr><td><code>json_url</code></td><td><span class="need">লাগবে</span></td><td>JSON ফাইলের লিংক</td></tr>
+      <tr><td><code>type</code></td><td><span class="need">লাগবে</span></td><td><code>notification</code> · <code>reminder</code> · <code>feedback</code> · <code>quiz</code> · আগের <code>message_type</code> নাম Firebase নেয় না</td></tr>
+      <tr><td><code>full_screen</code></td><td><span class="opt">ঐচ্ছিক</span></td><td><code>true</code> / <code>false</code> · আসার সাথে সাথে পুরো স্ক্রিনে খোলে</td></tr>
+      <tr><td><code>return_on_close</code></td><td><span class="opt">ঐচ্ছিক</span></td><td><code>true</code> / <code>false</code> · ✕ চাপলে আগের স্ক্রিনে ফেরে, অ্যাপ খোলে না</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="types">
+    <h2>🧭 চার ধরনের মেসেজ</h2>
+    <p class="sub"><code>type</code>-এ যা দেবেন, অ্যাপ সেই অনুযায়ী পেজ, আইকন আর লেবেল দেখায়।</p>
+    <div class="types">
+      <a class="type" href="#t1"><div class="icon i-blue">🔔</div><b>Notification</b><small>সাধারণ মেসেজ</small></a>
+      <a class="type" href="#t2"><div class="icon i-amber">⏰</div><b>Reminder</b><small>“রিমাইন্ডার” লেবেল</small></a>
+      <a class="type" href="#t3"><div class="icon i-green">💬</div><b>Feedback</b><small>WhatsApp বা Email</small></a>
+      <a class="type" href="#t4"><div class="icon i-purple">❓</div><b>Quiz</b><small>প্রশ্ন-উত্তর</small></a>
+    </div>
+  </section>
+
+  <section id="t1">
+    <h2><span class="icon i-blue">🔔</span> Message type 1 · Notification <span class="tag t-blue">notification</span></h2>
+    <p class="sub">বাংলা আর ইংরেজি দুটোই দিন; অ্যাপে যে ভাষা বাছা, সেটা দেখায়।</p>
+    <div class="fb"><div class="fb-head">১ · Firebase-এ যা পাঠাবেন</div><div class="fb-group">Notification</div><div class="kv"><span>Notification title</span><b>জুমার দিনের ৫টি আমল</b></div><div class="kv"><span>Notification text</span><b>এই শুক্রবার যে কাজগুলো ভুলবেন না</b></div><div class="kv"><span>Notification image</span><b>https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-1.png</b></div><div class="kv"><span>Android notification channel</span><b>— (খালি রাখুন)</b></div><div class="fb-group">Custom data</div><div class="kv"><span><code>json_url</code></span><b>https://mdabarik.github.io/welldev/islamic-quiz/2-notification-image-link.json</b></div><div class="kv"><span><code>type</code></span><b>notification</b></div><div class="kv"><span><code>full_screen</code></span><b>false</b></div><div class="kv"><span><code>return_on_close</code></span><b>false</b></div></div>
+    <div class="step">২ · JSON-এ যা থাকবে</div>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী</th></tr></thead><tbody><tr><td><code>title</code></td><td><span class="need">লাগবে</span></td><td>বাংলা শিরোনাম</td></tr><tr><td><code>title_en</code></td><td><span class="need">লাগবে</span></td><td>English title</td></tr><tr><td><code>description</code></td><td><span class="need">লাগবে</span></td><td>বাংলা লেখা · <code>\n</code> = নতুন লাইন · ভিতরের লিংকে ট্যাপ করা যায়</td></tr><tr><td><code>description_en</code></td><td><span class="need">লাগবে</span></td><td>English text</td></tr><tr><td><code>subtitle</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>শিরোনামের নিচে সোনালি লাইন; না দিলে লাইনটাই থাকে না</td></tr><tr><td><code>subtitle_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>English subtitle</td></tr><tr><td><code>image</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>পেজের উপরের ছবি; না দিলে ধরনের আইকন</td></tr><tr><td><code>youtube</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“YouTube-এ দেখুন” বাটন · ভিডিও YouTube অ্যাপে খোলে, পেজে চলে না</td></tr><tr><td><code>link</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“লিংক খুলুন” বাটন · YouTube লিংক হলে “YouTube-এ দেখুন”</td></tr></tbody></table></div>
+    <h3>বাটন কখন দেখায়</h3>
+    <div class="table"><table><thead><tr><th>JSON-এ</th><th>বাটন</th><th></th></tr></thead><tbody><tr><td><code>youtube</code></td><td><b>“YouTube-এ দেখুন”</b></td><td>ছবি থাকুক বা না থাকুক; ভিডিও পেজে চলে না</td></tr><tr><td><code>link</code> = YouTube</td><td><b>“YouTube-এ দেখুন”</b></td><td></td></tr><tr><td><code>link</code> = অন্য লিংক</td><td><b>“লিংক খুলুন”</b></td><td></td></tr><tr><td><code>link</code> + <code>youtube</code></td><td><b>দুটো বাটনই</b></td><td>দুটোই YouTube হলে একটা</td></tr><tr><td>কিছুই না</td><td><b>“ঠিক আছে”</b></td><td>চাপলে পেজ বন্ধ হয়</td></tr><tr><td>feedback</td><td><b>WhatsApp বা Email</b></td><td>আলাদা “ঠিক আছে” থাকে না</td></tr></tbody></table></div>
+    <h3>Samples</h3>
+    <div class="samples"><div class="sample"><div class="sample-head"><span>Sample 1 · শুধু লেখা</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;জুমার দিনের আমল&quot;,
+  &quot;title_en&quot;: &quot;Friday&#x27;s deeds&quot;,
+  &quot;description&quot;: &quot;সূরা কাহফ পড়তে ভুলবেন না। আজ বেশি বেশি দরুদ পড়ুন।&quot;,
+  &quot;description_en&quot;: &quot;Don&#x27;t forget Surah Al-Kahf. Send salawat often today.&quot;
+}</pre></div><div class="sample"><div class="sample-head"><span>Sample 2 · ছবি, সাবটাইটেল ও লিংক</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;জুমার দিনের ৫টি আমল&quot;,
+  &quot;title_en&quot;: &quot;Five deeds for Friday&quot;,
+  &quot;subtitle&quot;: &quot;এই শুক্রবার যে কাজগুলো ভুলবেন না&quot;,
+  &quot;subtitle_en&quot;: &quot;What not to miss this Friday&quot;,
+  &quot;description&quot;: &quot;১. আগে আগে মসজিদে যাওয়া।\n২. খুতবা শোনা।\nবিস্তারিত: https://mdabarik.github.io/welldev/&quot;,
+  &quot;description_en&quot;: &quot;1. Go to the mosque early.\n2. Listen to the khutbah.\nMore: https://mdabarik.github.io/welldev/&quot;,
+  &quot;image&quot;: &quot;https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-1.png&quot;,
+  &quot;link&quot;: &quot;https://mdabarik.github.io/welldev/islamic-quiz/&quot;
+}</pre></div><div class="sample"><div class="sample-head"><span>Sample 3 · ছবি ও YouTube বাটন</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;সূরা মুলকের তাফসির&quot;,
+  &quot;title_en&quot;: &quot;Tafsir of Surah Al-Mulk&quot;,
+  &quot;description&quot;: &quot;নিচের বাটনে চাপলে ভিডিওটা YouTube-এ খুলবে।&quot;,
+  &quot;description_en&quot;: &quot;Tap the button below to watch it on YouTube.&quot;,
+  &quot;image&quot;: &quot;https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-2.png&quot;,
+  &quot;youtube&quot;: &quot;https://www.youtube.com/watch?v=jNQXAC9IVRw&quot;
+}</pre></div></div>
+  </section>
+
+  <section id="t2">
+    <h2><span class="icon i-amber">⏰</span> Message type 2 · Reminder <span class="tag t-amber">reminder</span></h2>
+    <p class="sub">ছবি, YouTube বা কিছুই না, যা খুশি; বাটন Notification-এর মতোই।</p>
+    <div class="fb"><div class="fb-head">১ · Firebase-এ যা পাঠাবেন</div><div class="fb-group">Notification</div><div class="kv"><span>Notification title</span><b>আজ রাতে শবে বরাত</b></div><div class="kv"><span>Notification text</span><b>রাতে নফল নামাজ আর দোয়ার কথা ভুলবেন না।</b></div><div class="kv"><span>Notification image</span><b>https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-2.png</b></div><div class="kv"><span>Android notification channel</span><b>— (খালি রাখুন)</b></div><div class="fb-group">Custom data</div><div class="kv"><span><code>json_url</code></span><b>https://mdabarik.github.io/welldev/islamic-quiz/5-reminder-image.json</b></div><div class="kv"><span><code>type</code></span><b>reminder</b></div><div class="kv"><span><code>full_screen</code></span><b>false</b></div><div class="kv"><span><code>return_on_close</code></span><b>false</b></div></div>
+    <div class="step">২ · JSON-এ যা থাকবে</div>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী</th></tr></thead><tbody><tr><td><code>title</code></td><td><span class="need">লাগবে</span></td><td>বাংলা শিরোনাম</td></tr><tr><td><code>title_en</code></td><td><span class="need">লাগবে</span></td><td>English title</td></tr><tr><td><code>description</code></td><td><span class="need">লাগবে</span></td><td>বাংলা লেখা · <code>\n</code> = নতুন লাইন · ভিতরের লিংকে ট্যাপ করা যায়</td></tr><tr><td><code>description_en</code></td><td><span class="need">লাগবে</span></td><td>English text</td></tr><tr><td><code>subtitle</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>শিরোনামের নিচে সোনালি লাইন; না দিলে লাইনটাই থাকে না</td></tr><tr><td><code>subtitle_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>English subtitle</td></tr><tr><td><code>image</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>পেজের উপরের ছবি; না দিলে ধরনের আইকন</td></tr><tr><td><code>youtube</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“YouTube-এ দেখুন” বাটন · ভিডিও YouTube অ্যাপে খোলে, পেজে চলে না</td></tr><tr><td><code>link</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“লিংক খুলুন” বাটন · YouTube লিংক হলে “YouTube-এ দেখুন”</td></tr></tbody></table></div>
+    <h3>Samples</h3>
+    <div class="samples"><div class="sample"><div class="sample-head"><span>Sample 1 · শুধু লেখা</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;জুমার নামাজের রিমাইন্ডার&quot;,
+  &quot;title_en&quot;: &quot;Jumu&#x27;ah reminder&quot;,
+  &quot;subtitle&quot;: &quot;আজান ১২:০০ টায়&quot;,
+  &quot;subtitle_en&quot;: &quot;Azan at 12:00&quot;,
+  &quot;description&quot;: &quot;আগে আগে মসজিদে যান।&quot;,
+  &quot;description_en&quot;: &quot;Go to the mosque early.&quot;
+}</pre></div><div class="sample"><div class="sample-head"><span>Sample 2 · ছবিসহ</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;আজ রাতে শবে বরাত&quot;,
+  &quot;title_en&quot;: &quot;Shab-e-Barat tonight&quot;,
+  &quot;description&quot;: &quot;রাতে নফল নামাজ আর দোয়ার কথা ভুলবেন না।&quot;,
+  &quot;description_en&quot;: &quot;Remember the night prayers and dua tonight.&quot;,
+  &quot;image&quot;: &quot;https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-2.png&quot;
+}</pre></div></div>
+  </section>
+
+  <section id="t3">
+    <h2><span class="icon i-green">💬</span> Message type 3 · Feedback <span class="tag t-green">feedback</span></h2>
+    <p class="sub">দুই রকম। Firebase-এ <code>type</code> দুটোতেই <code>feedback</code>; কোনটা হবে তা ঠিক করে JSON-এর <code>feedback_type</code>: <code>whatsapp</code> বা <code>email</code>।</p>
+    <h3>3a · WhatsApp</h3>
+    <div class="fb"><div class="fb-head">১ · Firebase-এ যা পাঠাবেন</div><div class="fb-group">Notification</div><div class="kv"><span>Notification title</span><b>আপনার মতামত দিন</b></div><div class="kv"><span>Notification text</span><b>অ্যাপটি কেমন লাগছে WhatsApp-এ জানান।</b></div><div class="kv"><span>Notification image</span><b>— (দরকার নেই)</b></div><div class="kv"><span>Android notification channel</span><b>— (খালি রাখুন)</b></div><div class="fb-group">Custom data</div><div class="kv"><span><code>json_url</code></span><b>https://mdabarik.github.io/welldev/islamic-quiz/6-feedback-whatsapp.json</b></div><div class="kv"><span><code>type</code></span><b>feedback</b></div><div class="kv"><span><code>full_screen</code></span><b>false</b></div><div class="kv"><span><code>return_on_close</code></span><b>false</b></div></div>
+    <div class="step">২ · JSON-এ যা থাকবে</div>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী</th></tr></thead><tbody><tr><td><code>title</code></td><td><span class="need">লাগবে</span></td><td>বাংলা শিরোনাম</td></tr><tr><td><code>title_en</code></td><td><span class="need">লাগবে</span></td><td>English title</td></tr><tr><td><code>description</code></td><td><span class="need">লাগবে</span></td><td>বাংলা লেখা · <code>\n</code> = নতুন লাইন · ভিতরের লিংকে ট্যাপ করা যায়</td></tr><tr><td><code>description_en</code></td><td><span class="need">লাগবে</span></td><td>English text</td></tr><tr><td><code>subtitle</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>শিরোনামের নিচে সোনালি লাইন; না দিলে লাইনটাই থাকে না</td></tr><tr><td><code>subtitle_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>English subtitle</td></tr><tr><td><code>image</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>পেজের উপরের ছবি; না দিলে ধরনের আইকন</td></tr><tr><td><code>youtube</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“YouTube-এ দেখুন” বাটন · ভিডিও YouTube অ্যাপে খোলে, পেজে চলে না</td></tr><tr><td><code>feedback_type</code></td><td><span class="need">লাগবে</span></td><td><code>"whatsapp"</code></td></tr><tr><td><code>whatsapp</code></td><td><span class="need">লাগবে</span></td><td>দেশের কোডসহ নম্বর: 8801XXXXXXXXX</td></tr></tbody></table></div>
+    <div class="samples" style="margin-top:12px"><div class="sample"><div class="sample-head"><span>Sample · WhatsApp</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;আপনার মতামত দিন&quot;,
+  &quot;title_en&quot;: &quot;Share your feedback&quot;,
+  &quot;description&quot;: &quot;অ্যাপটি কেমন লাগছে WhatsApp-এ জানান।&quot;,
+  &quot;description_en&quot;: &quot;Tell us on WhatsApp how you like the app.&quot;,
+  &quot;feedback_type&quot;: &quot;whatsapp&quot;,
+  &quot;whatsapp&quot;: &quot;8801XXXXXXXXX&quot;
+}</pre></div></div>
+    <h3>3b · Email</h3>
+    <div class="fb"><div class="fb-head">১ · Firebase-এ যা পাঠাবেন</div><div class="fb-group">Notification</div><div class="kv"><span>Notification title</span><b>নতুন কুইজ কেমন লাগলো?</b></div><div class="kv"><span>Notification text</span><b>ইমেইলে আপনার মতামত জানান।</b></div><div class="kv"><span>Notification image</span><b>— (দরকার নেই)</b></div><div class="kv"><span>Android notification channel</span><b>— (খালি রাখুন)</b></div><div class="fb-group">Custom data</div><div class="kv"><span><code>json_url</code></span><b>https://mdabarik.github.io/welldev/islamic-quiz/7-feedback-email.json</b></div><div class="kv"><span><code>type</code></span><b>feedback</b></div><div class="kv"><span><code>full_screen</code></span><b>false</b></div><div class="kv"><span><code>return_on_close</code></span><b>false</b></div></div>
+    <div class="step">২ · JSON-এ যা থাকবে</div>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী</th></tr></thead><tbody><tr><td><code>title</code></td><td><span class="need">লাগবে</span></td><td>বাংলা শিরোনাম</td></tr><tr><td><code>title_en</code></td><td><span class="need">লাগবে</span></td><td>English title</td></tr><tr><td><code>description</code></td><td><span class="need">লাগবে</span></td><td>বাংলা লেখা · <code>\n</code> = নতুন লাইন · ভিতরের লিংকে ট্যাপ করা যায়</td></tr><tr><td><code>description_en</code></td><td><span class="need">লাগবে</span></td><td>English text</td></tr><tr><td><code>subtitle</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>শিরোনামের নিচে সোনালি লাইন; না দিলে লাইনটাই থাকে না</td></tr><tr><td><code>subtitle_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>English subtitle</td></tr><tr><td><code>image</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>পেজের উপরের ছবি; না দিলে ধরনের আইকন</td></tr><tr><td><code>youtube</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>“YouTube-এ দেখুন” বাটন · ভিডিও YouTube অ্যাপে খোলে, পেজে চলে না</td></tr><tr><td><code>feedback_type</code></td><td><span class="need">লাগবে</span></td><td><code>"email"</code></td></tr><tr><td><code>email</code></td><td><span class="need">লাগবে</span></td><td>ইমেইল ঠিকানা</td></tr></tbody></table></div>
+    <div class="samples" style="margin-top:12px"><div class="sample"><div class="sample-head"><span>Sample · Email</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;title&quot;: &quot;নতুন কুইজ কেমন লাগলো?&quot;,
+  &quot;title_en&quot;: &quot;How was the new quiz?&quot;,
+  &quot;description&quot;: &quot;ইমেইলে আপনার মতামত জানান।&quot;,
+  &quot;description_en&quot;: &quot;Send us your thoughts by email.&quot;,
+  &quot;feedback_type&quot;: &quot;email&quot;,
+  &quot;email&quot;: &quot;support@example.com&quot;
+}</pre></div></div>
+  </section>
+
+  <section id="t4">
+    <h2><span class="icon i-purple">❓</span> Message type 4 · Quiz <span class="tag t-purple">quiz</span></h2>
+    <p class="sub">ভুল হলে লাল দাগ আর “আবার চেষ্টা করুন”; সব ঠিক হলে ফলাফল ফোনে সেভ। মাঝপথে বন্ধ করলেও উত্তর থাকে।</p>
+    <div class="fb"><div class="fb-head">১ · Firebase-এ যা পাঠাবেন</div><div class="fb-group">Notification</div><div class="kv"><span>Notification title</span><b>পরীক্ষার কুইজ</b></div><div class="kv"><span>Notification text</span><b>২টি প্রশ্নের উত্তর দিন</b></div><div class="kv"><span>Notification image</span><b>https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-1.png</b></div><div class="kv"><span>Android notification channel</span><b>— (খালি রাখুন)</b></div><div class="fb-group">Custom data</div><div class="kv"><span><code>json_url</code></span><b>https://mdabarik.github.io/welldev/islamic-quiz/8-quiz.json</b></div><div class="kv"><span><code>type</code></span><b>quiz</b></div><div class="kv"><span><code>full_screen</code></span><b>false</b></div><div class="kv"><span><code>return_on_close</code></span><b>false</b></div></div>
+    <div class="step">২ · JSON-এ যা থাকবে</div>
+    <div class="table"><table><thead><tr><th>ঘর</th><th></th><th>কী</th></tr></thead><tbody><tr><td><code>id</code></td><td><span class="need">লাগবে</span></td><td>প্রতিটা কুইজে আলাদা; ফলাফল এই নামে ফোনে সেভ হয়</td></tr><tr><td><code>title</code></td><td><span class="need">লাগবে</span></td><td>বাংলা নাম</td></tr><tr><td><code>title_en</code></td><td><span class="need">লাগবে</span></td><td>English name</td></tr><tr><td><code>description</code></td><td><span class="opt">ঐচ্ছিক</span></td><td></td></tr><tr><td><code>description_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td></td></tr><tr><td><code>image</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>না দিলে কুইজের লোগো</td></tr><tr><td><code>questions</code></td><td><span class="need">লাগবে</span></td><td>যত খুশি প্রশ্ন; প্রতিটায় নিচের ঘরগুলো</td></tr><tr><td><code>· question</code></td><td><span class="need">লাগবে</span></td><td></td></tr><tr><td><code>· question_en</code></td><td><span class="need">লাগবে</span></td><td></td></tr><tr><td><code>· options</code></td><td><span class="need">লাগবে</span></td><td>কমপক্ষে ২টা</td></tr><tr><td><code>· options_en</code></td><td><span class="need">লাগবে</span></td><td>options-এর সমান সংখ্যা</td></tr><tr><td><code>· answer</code></td><td><span class="need">লাগবে</span></td><td>সঠিক অপশনের নম্বর, ০ থেকে গোনা: প্রথম অপশন = 0</td></tr><tr><td><code>· explanation</code></td><td><span class="opt">ঐচ্ছিক</span></td><td>সব ঠিক হলে প্রশ্নের নিচে দেখায়</td></tr><tr><td><code>· explanation_en</code></td><td><span class="opt">ঐচ্ছিক</span></td><td></td></tr></tbody></table></div>
+    <h3>Sample</h3>
+    <div class="samples"><div class="sample"><div class="sample-head"><span>Sample · ২ প্রশ্নের কুইজ</span><button class="copy" type="button">কপি</button></div><pre>{
+  &quot;id&quot;: &quot;sample-quiz-1&quot;,
+  &quot;title&quot;: &quot;পরীক্ষার কুইজ&quot;,
+  &quot;title_en&quot;: &quot;Sample quiz&quot;,
+  &quot;description&quot;: &quot;২টি প্রশ্নের উত্তর দিন&quot;,
+  &quot;description_en&quot;: &quot;Answer both questions&quot;,
+  &quot;image&quot;: &quot;https://mdabarik.github.io/welldev/islamic-quiz/images/quiz-1.png&quot;,
+  &quot;questions&quot;: [
+    {
+      &quot;question&quot;: &quot;জুমার নামাজ কয় রাকাত ফরজ?&quot;,
+      &quot;question_en&quot;: &quot;How many fard rakats is Jumu&#x27;ah?&quot;,
+      &quot;options&quot;: [
+        &quot;২ রাকাত&quot;,
+        &quot;৪ রাকাত&quot;,
+        &quot;৩ রাকাত&quot;
+      ],
+      &quot;options_en&quot;: [
+        &quot;2 rakats&quot;,
+        &quot;4 rakats&quot;,
+        &quot;3 rakats&quot;
+      ],
+      &quot;answer&quot;: 0,
+      &quot;explanation&quot;: &quot;জুমার ফরজ ২ রাকাত।&quot;,
+      &quot;explanation_en&quot;: &quot;Jumu&#x27;ah is 2 fard rakats.&quot;
+    },
+    {
+      &quot;question&quot;: &quot;জুমার দিনে কোন সূরা পড়া সুন্নত?&quot;,
+      &quot;question_en&quot;: &quot;Which surah is sunnah to recite on Friday?&quot;,
+      &quot;options&quot;: [
+        &quot;সূরা ইয়াসিন&quot;,
+        &quot;সূরা আল-কাহফ&quot;,
+        &quot;সূরা আল-মুলক&quot;
+      ],
+      &quot;options_en&quot;: [
+        &quot;Surah Ya-Sin&quot;,
+        &quot;Surah Al-Kahf&quot;,
+        &quot;Surah Al-Mulk&quot;
+      ],
+      &quot;answer&quot;: 1,
+      &quot;explanation&quot;: &quot;জুমার দিনে সূরা আল-কাহফ পড়ার ফজিলত হাদিসে এসেছে।&quot;,
+      &quot;explanation_en&quot;: &quot;A hadith tells of the virtue of reciting Al-Kahf on Friday.&quot;
+    }
+  ]
+}</pre></div></div>
+  </section>
+
+  <section id="rules">
+    <h2>✅ পাঠানোর আগে</h2>
+    <ol class="steps">
+      <li><span>JSON ফাইল বানিয়ে GitHub-এ দিন: <code>welldev/islamic-quiz/</code> → <code>https://mdabarik.github.io/welldev/islamic-quiz/&lt;নাম&gt;.json</code></span></li>
+      <li><span>১-২ মিনিট পর লিংকটা ব্রাউজারে খুলে দেখুন; JSON ঠিক কি না jsonlint.com-এ চেক করুন।</span></li>
+      <li><span>Firebase-এ title, text, image দিন; Custom data-তে <code>json_url</code> আর <code>type</code>।</span></li>
+      <li><span>আগে “Send test message” দিয়ে নিজের ফোনে দেখুন, তারপর সবাইকে পাঠান।</span></li>
+    </ol>
+    <div class="note">প্রতিটা নতুন মেসেজ <b>নতুন ফাইলে</b> দিন — অ্যাপ একটা লিংক একবারই নামায়। কুইজের <code>id</code> সবসময় আলাদা। ছবি ১ MB-এর কম, ২:১ বা ১৬:৯।</div>
+  </section>
+</main>
+
+<footer>
+  তৈরি করেছেন <b>Mohammed Abdul Barik</b> · Muslim Days
+</footer>
+
+<script>
+  document.querySelectorAll('.sample').forEach(box => {
+    const text = box.querySelector('pre').innerText.trim();
+    const b = box.querySelector('.copy');
+    b.onclick = async () => {
+      try { await navigator.clipboard.writeText(text); b.textContent = 'কপি হয়েছে ✓'; }
+      catch { b.textContent = 'হয়নি'; }
+      setTimeout(() => b.textContent = 'কপি', 1600);
+    };
+  });
+</script>
+</body>
+</html>

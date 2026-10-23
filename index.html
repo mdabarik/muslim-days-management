@@ -41,6 +41,8 @@
     button { font: inherit; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; }
     button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
     button.small { padding: 5px 10px; font-size: 13px; }
+    .linkbtn { padding: 5px 10px; font-size: 13px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; }
+    a { color: var(--accent); }
     button.danger { color: var(--danger); }
     button:disabled { opacity: .6; cursor: default; }
     .q { border: 1px dashed var(--line); border-radius: 10px; padding: 12px; margin: 12px 0; }
@@ -67,6 +69,7 @@
   <main>
     <section id="login" class="card" hidden>
       <h1>Muslim Days Push</h1>
+      <p class="hint">কীভাবে পাঠাবেন, কোন ঘরে কী দেবেন: <a href="guide.html" target="_blank" rel="noopener">📖 গাইড দেখুন</a></p>
       <label class="f" for="pw">Admin পাসওয়ার্ড</label>
       <input id="pw" type="password" autocomplete="current-password">
       <label class="check"><input id="remember" type="checkbox"> <span>এই ব্রাউজারে মনে রাখো</span></label>
@@ -77,7 +80,10 @@
     <section id="app" hidden>
       <div class="top">
         <h1>Muslim Days · নোটিফিকেশন পাঠান</h1>
-        <button id="logout" class="small">লগআউট</button>
+        <div class="row">
+          <a class="linkbtn" href="guide.html" target="_blank" rel="noopener">📖 গাইড</a>
+          <button id="logout" class="small">লগআউট</button>
+        </div>
       </div>
 
       <div class="tabs" role="tablist" id="tabs"></div>
