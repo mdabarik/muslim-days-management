@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Muslim Days Push</title>
+  <style>
+    :root { --bg: #f6f7f9; --card: #fff; --text: #1a1d21; --muted: #6b7280; --line: #e5e7eb; --accent: #0f766e; --accent-soft: #ccfbf1; --danger: #dc2626; --ok: #16a34a; --warn: #b45309; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1115; --card: #181b21; --text: #e8eaed; --muted: #9aa0a6; --line: #2a2e36; --accent: #2dd4bf; --accent-soft: #134e4a; --danger: #f87171; --ok: #4ade80; --warn: #fbbf24; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, "Noto Sans Bengali", sans-serif; font-size: 15px; }
+    main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 64px; }
+    h1 { font-size: 20px; margin: 0; }
+    h2 { font-size: 15px; margin: 0 0 4px; }
+    .hint { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tab { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; font: inherit; }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .subtabs { display: flex; gap: 6px; margin: 0 0 12px; }
+    .subtabs .tab { padding: 6px 12px; font-size: 14px; }
+    .subtabs .tab[aria-selected="true"] { background: var(--accent-soft); color: var(--text); border-color: var(--accent); }
+    .grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+    @media (max-width: 600px) { .fields { grid-template-columns: 1fr; } }
+    .full { grid-column: 1 / -1; }
+    label.f { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+    label.f b { color: var(--danger); font-weight: normal; }
+    input[type=text], input[type=url], input[type=email], input[type=password], input[type=tel], textarea { width: 100%; padding: 9px 10px; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
+    textarea { min-height: 84px; resize: vertical; }
+    input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+    .check { display: flex; gap: 8px; align-items: flex-start; margin: 8px 0; }
+    .check input { margin-top: 3px; }
+    .check small { display: block; color: var(--muted); }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    button { font: inherit; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; }
+    button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    button.small { padding: 5px 10px; font-size: 13px; }
+    button.danger { color: var(--danger); }
+    button:disabled { opacity: .6; cursor: default; }
+    .q { border: 1px dashed var(--line); border-radius: 10px; padding: 12px; margin: 12px 0; }
+    .q-head { display: flex; justify-content: space-between; align-items: center; }
+    .opt { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 6px; align-items: center; margin: 6px 0; }
+    @media (max-width: 600px) { .opt { grid-template-columns: auto 1fr auto; } .opt .en { grid-column: 2; } }
+    .opt input[type=radio] { width: 18px; height: 18px; }
+    #msg { margin-top: 12px; min-height: 20px; font-size: 14px; overflow-wrap: anywhere; }
+    .ok { color: var(--ok); } .err { color: var(--danger); }
+    pre { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; overflow: auto; font-size: 12px; max-height: 360px; margin: 8px 0 0; }
+    details summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { border: 1px solid var(--line); border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+    li strong { display: block; }
+    li small { color: var(--muted); display: block; margin: 2px 0 8px; }
+    .empty { color: var(--muted); font-size: 14px; }
+    .target { display: flex; gap: 16px; flex-wrap: wrap; margin: 6px 0; }
+    .target label { display: flex; gap: 6px; align-items: center; }
+    #login { max-width: 360px; margin: 64px auto; }
+    .sticky { position: sticky; top: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <section id="login" class="card" hidden>
+      <h1>Muslim Days Push</h1>
+      <label class="f" for="pw">Admin পাসওয়ার্ড</label>
+      <input id="pw" type="password" autocomplete="current-password">
+      <label class="check"><input id="remember" type="checkbox"> <span>এই ব্রাউজারে মনে রাখো</span></label>
+      <div class="row"><button class="primary" id="loginBtn">ঢুকুন</button></div>
+      <p id="loginMsg" class="err"></p>
+    </section>
+
+    <section id="app" hidden>
+      <div class="top">
+        <h1>Muslim Days · নোটিফিকেশন পাঠান</h1>
+        <button id="logout" class="small">লগআউট</button>
+      </div>
+
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="subtabs" role="tablist" id="subtabs" hidden></div>
+
+      <div class="grid">
+        <div>
+          <div class="card">
+            <div class="row" style="justify-content:space-between">
+              <div>
+                <h2 id="contentTitle">অ্যাপের ভিতরের পেজ</h2>
+                <p class="hint" id="contentHint"></p>
+              </div>
+              <button class="small" id="fillSample">Sample দিয়ে ভরো</button>
+            </div>
+            <div class="subtabs" role="tablist" id="modeTabs">
+              <button class="tab" role="tab" data-mode="manual">✍️ ঘর পূরণ করে</button>
+              <button class="tab" role="tab" data-mode="link">🔗 নিজের JSON লিংক</button>
+            </div>
+            <div id="manualBox">
+              <div class="fields" id="contentFields"></div>
+              <div id="quizBox" hidden>
+                <div id="questions"></div>
+                <button class="small" id="addQ">+ প্রশ্ন যোগ করো</button>
+              </div>
+            </div>
+            <div id="linkBox" hidden>
+              <label class="f" for="jsonUrl">JSON ফাইলের লিংক <b>*</b></label>
+              <input type="url" id="jsonUrl" placeholder="https://mdabarik.github.io/welldev/islamic-quiz/নাম.json">
+              <p class="hint">ফাইলটা গাইডের ফরম্যাটে হতে হবে। প্রতিটা নতুন মেসেজ নতুন ফাইলে দিন, কারণ অ্যাপ একটা লিংক একবারই নামায়। পাঠানোর আগে ফাইলটা নিজে থেকেই যাচাই হবে।</p>
+              <div class="row">
+                <button class="small" id="checkLink">লিংক যাচাই করো</button>
+                <button class="small" id="importLink" hidden>ঘরে বসাও (এডিট করতে)</button>
+              </div>
+              <div id="linkMsg" style="margin-top:8px;font-size:14px"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>নোটিফিকেশন বার</h2>
+            <p class="hint">ফোনের উপরের বারে যা দেখাবে। খালি রাখলে উপরের পেজ (বা JSON ফাইল) থেকে নেওয়া হবে।</p>
+            <div class="fields">
+              <div><label class="f" for="bar_title">Notification title</label><input type="text" id="bar_title" data-bar="title"></div>
+              <div><label class="f" for="bar_image">Notification image (লিংক)</label><input type="url" id="bar_image" data-bar="image"></div>
+              <div class="full"><label class="f" for="bar_body">Notification text</label><input type="text" id="bar_body" data-bar="body"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>পাঠানোর সেটিংস</h2>
+            <p class="hint">type: <code id="typeValue"></code> · উপরের ট্যাব দেখে নিজে থেকেই বসে, আলাদা করে লিখতে হয় না।</p>
+            <label class="check"><input type="checkbox" id="full_screen"> <span>full_screen<small>মেসেজ আসার সাথে সাথে পুরো স্ক্রিনে খুলবে</small></span></label>
+            <label class="check"><input type="checkbox" id="return_on_close"> <span>return_on_close<small>full_screen-এর সাথে: ✕ চাপলে আগের অ্যাপে ফিরে যাবে</small></span></label>
+            <label class="f">কাকে পাঠাবেন</label>
+            <div class="target">
+              <label><input type="radio" name="target" value="debug" checked> ডিবাগ ফোনে (টেস্ট)</label>
+              <label><input type="radio" name="target" value="all"> সব ইউজারকে</label>
+            </div>
+            <p class="hint" id="debugHint">যে ফোনে debug অ্যাপ (flutter run) চালানো হয়েছে, শুধু সেগুলোতে যাবে। Play Store-এর ইউজাররা পাবে না।</p>
+            <div id="tokenBox">
+              <label class="f" for="testToken">শুধু একটা ফোনে পাঠাতে চাইলে তার FCM token (ঐচ্ছিক)</label>
+              <input type="text" id="testToken" placeholder="খালি রাখলে সব ডিবাগ ফোনে যাবে">
+            </div>
+            <div class="row" style="margin-top:16px">
+              <button class="primary" id="send">📤 পাঠাও</button>
+              <button id="saveTpl">💾 Template সেভ</button>
+              <button id="clear">এই ট্যাব খালি করো</button>
+            </div>
+            <div id="msg"></div>
+            <details style="margin-top:12px">
+              <summary>যা পাঠানো হবে (JSON) দেখুন</summary>
+              <pre id="preview"></pre>
+            </details>
+          </div>
+        </div>
+
+        <div class="card sticky">
+          <h2>সেভ করা Template</h2>
+          <p class="hint">লোড করলে সেই ধরনের ট্যাবে চলে যাবে।</p>
+          <ul id="tplList"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="push-config.js"></script>
+  <script>
+    const API = self.PUSH_CONFIG.workerUrl;
+    const $ = (id) => document.getElementById(id);
+
+    // ---------- message types (from docs/firebase-push-guide.html) ----------
+
+    const FIELD = {
+      title: { label: "শিরোনাম (বাংলা)", type: "text" },
+      title_en: { label: "Title (English)", type: "text" },
+      subtitle: { label: "সাবটাইটেল (বাংলা)", type: "text" },
+      subtitle_en: { label: "Subtitle (English)", type: "text" },
+      description: { label: "লেখা (বাংলা) · Enter = নতুন লাইন", type: "textarea", full: true },
+      description_en: { label: "Text (English)", type: "textarea", full: true },
+      image: { label: "পেজের ছবি (লিংক)", type: "url" },
+      youtube: { label: "YouTube লিংক", type: "url" },
+      link: { label: "লিংক বাটন", type: "url", full: true },
+      whatsapp: { label: "WhatsApp নম্বর (8801XXXXXXXXX)", type: "tel" },
+      email: { label: "ইমেইল ঠিকানা", type: "email" },
+      id: { label: "কুইজ id (প্রতিটায় আলাদা)", type: "text" },
+    };
+
+    const PAGE = ["title", "title_en", "subtitle", "subtitle_en", "description", "description_en", "image", "youtube"];
+    const DOCS = "https://mdabarik.github.io/welldev/islamic-quiz/";
+    const IMG = DOCS + "images/";
+
+    const TYPES = {
+      notification: {
+        tab: "🔔 Notification", messageType: "notification",
+        hint: "সাধারণ মেসেজ। বাংলা আর ইংরেজি দুটোই দিন।",
+        fields: [...PAGE, "link"], required: ["title", "title_en", "description", "description_en"],
+        sample: {
+          title: "জুমার দিনের ৫টি আমল", title_en: "Five deeds for Friday",
+          subtitle: "এই শুক্রবার যে কাজগুলো ভুলবেন না", subtitle_en: "What not to miss this Friday",
+          description: "১. আগে আগে মসজিদে যাওয়া।\n২. খুতবা শোনা।\nবিস্তারিত: https://mdabarik.github.io/welldev/",
+          description_en: "1. Go to the mosque early.\n2. Listen to the khutbah.\nMore: https://mdabarik.github.io/welldev/",
+          image: IMG + "quiz-1.png", link: "https://mdabarik.github.io/welldev/islamic-quiz/",
+        },
+      },
+      reminder: {
+        tab: "⏰ Reminder", messageType: "reminder",
+        hint: "“রিমাইন্ডার” লেবেলসহ দেখায়। বাটন Notification-এর মতোই।",
+        fields: [...PAGE, "link"], required: ["title", "title_en", "description", "description_en"],
+        sample: {
+          title: "আজ রাতে শবে বরাত", title_en: "Shab-e-Barat tonight",
+          description: "রাতে নফল নামাজ আর দোয়ার কথা ভুলবেন না।",
+          description_en: "Remember the night prayers and dua tonight.",
+          image: IMG + "quiz-2.png",
+        },
+      },
+      "feedback-whatsapp": {
+        tab: "💬 Feedback", sub: "WhatsApp", messageType: "feedback", extra: { feedback_type: "whatsapp" },
+        hint: "ইউজার WhatsApp-এ মতামত পাঠাবে।",
+        fields: [...PAGE, "whatsapp"], required: ["title", "title_en", "description", "description_en", "whatsapp"],
+        sample: {
+          title: "আপনার মতামত দিন", title_en: "Share your feedback",
+          description: "অ্যাপটি কেমন লাগছে WhatsApp-এ জানান।",
+          description_en: "Tell us on WhatsApp how you like the app.",
+          whatsapp: "8801XXXXXXXXX",
+        },
+      },
+      "feedback-email": {
+        tab: "💬 Feedback", sub: "Email", messageType: "feedback", extra: { feedback_type: "email" },
+        hint: "ইউজার ইমেইলে মতামত পাঠাবে।",
+        fields: [...PAGE, "email"], required: ["title", "title_en", "description", "description_en", "email"],
+        sample: {
+          title: "নতুন কুইজ কেমন লাগলো?", title_en: "How was the new quiz?",
+          description: "ইমেইলে আপনার মতামত জানান।",
+          description_en: "Send us your thoughts by email.",
+          email: "support@example.com",
+        },
+      },
+      quiz: {
+        tab: "❓ Quiz", messageType: "quiz",
+        hint: "ভুল হলে “আবার চেষ্টা করুন”; সব ঠিক হলে ফলাফল ফোনে সেভ হয়। answer = সঠিক অপশনে টিক দিন।",
+        fields: ["title", "title_en", "id", "image", "description", "description_en"], required: ["id", "title", "title_en"],
+        sample: {
+          title: "পরীক্ষার কুইজ", title_en: "Sample quiz",
+          description: "২টি প্রশ্নের উত্তর দিন", description_en: "Answer both questions",
+          image: IMG + "quiz-1.png",
+          questions: [
+            { question: "জুমার নামাজ কয় রাকাত ফরজ?", question_en: "How many fard rakats is Jumu'ah?",
+              options: ["২ রাকাত", "৪ রাকাত", "৩ রাকাত"], options_en: ["2 rakats", "4 rakats", "3 rakats"], answer: 0,
+              explanation: "জুমার ফরজ ২ রাকাত।", explanation_en: "Jumu'ah is 2 fard rakats." },
+            { question: "জুমার দিনে কোন সূরা পড়া সুন্নত?", question_en: "Which surah is sunnah to recite on Friday?",
+              options: ["সূরা ইয়াসিন", "সূরা আল-কাহফ", "সূরা আল-মুলক"], options_en: ["Surah Ya-Sin", "Surah Al-Kahf", "Surah Al-Mulk"], answer: 1,
+              explanation: "জুমার দিনে সূরা আল-কাহফ পড়ার ফজিলত হাদিসে এসেছে।", explanation_en: "A hadith tells of the virtue of reciting Al-Kahf on Friday." },
+          ],
+        },
+      },
+    };
+
+    // Live JSON files for "Sample দিয়ে ভরো" in link mode. The guide's other
+    // sample files (2-notification-image-link.json …) are not on GitHub yet.
+    const SAMPLE_URL = {
+      quiz: DOCS + "quiz-1.json",
+    };
+
+    // Each type keeps its own form while you switch tabs.
+    const state = Object.fromEntries(Object.keys(TYPES).map((k) => [k, blank(k)]));
+    let current = "notification";
+    let password = "";
+    let templates = [];
+
+    // mode "manual": the page is built from the fields; "link": your own json_url.
+    // linked = the last JSON fetched from jsonUrl (for the bar's fallback text).
+    function blank(type, mode = "manual") {
+      const s = { mode, jsonUrl: "", linked: null, page: {}, bar: {}, full_screen: false, return_on_close: false };
+      if (type === "quiz") s.questions = [emptyQuestion()];
+      return s;
+    }
+    function emptyQuestion() {
+      return { question: "", question_en: "", options: ["", ""], options_en: ["", ""], answer: -1, explanation: "", explanation_en: "" };
+    }
+    function newQuizId() {
+      const d = new Date(), p = (n) => String(n).padStart(2, "0");
+      return `quiz-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${Math.random().toString(36).slice(2, 6)}`;
+    }
+
+    // ---------- storage + api ----------
+
+    function store(key, value) {
+      try { value == null ? localStorage.removeItem(key) : localStorage.setItem(key, value); } catch {}
+    }
+    function load(key) {
+      try { return localStorage.getItem(key); } catch { return null; }
+    }
+
+    async function api(path, options = {}) {
+      const r = await fetch(API + path, {
+        ...options,
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + password },
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw Object.assign(new Error(data.error || "HTTP " + r.status), { status: r.status });
+      return data;
+    }
+
+    function show(text, ok) {
+      $("msg").textContent = text;
+      $("msg").className = ok ? "ok" : "err";
+    }
+
+    // ---------- tabs ----------
+
+    function renderTabs() {
+      const tabs = $("tabs");
+      tabs.replaceChildren();
+      const seen = new Set();
+      for (const [key, t] of Object.entries(TYPES)) {
+        if (seen.has(t.tab)) continue;
+        seen.add(t.tab);
+        const b = document.createElement("button");
+        b.className = "tab";
+        b.setAttribute("role", "tab");
+        b.textContent = t.tab;
+        b.setAttribute("aria-selected", String(TYPES[current].tab === t.tab));
+        b.onclick = () => switchTo(TYPES[current].tab === t.tab ? current : key);
+        tabs.append(b);
+      }
+      const subs = Object.entries(TYPES).filter(([, t]) => t.sub && t.tab === TYPES[current].tab);
+      $("subtabs").hidden = !subs.length;
+      $("subtabs").replaceChildren(...subs.map(([key, t]) => {
+        const b = document.createElement("button");
+        b.className = "tab";
+        b.setAttribute("role", "tab");
+        b.textContent = t.sub;
+        b.setAttribute("aria-selected", String(key === current));
+        b.onclick = () => switchTo(key);
+        return b;
+      }));
+    }
+
+    function switchTo(type) {
+      saveForm();
+      current = type;
+      store("adminTab", type);
+      renderTabs();
+      renderForm();
+    }
+
+    // ---------- form ----------
+
+    function renderForm() {
+      const t = TYPES[current], s = state[current];
+      $("contentTitle").textContent = "অ্যাপের ভিতরের পেজ · " + (t.sub ? `${t.tab} · ${t.sub}` : t.tab);
+      $("contentHint").textContent = t.hint;
+      $("typeValue").textContent = t.messageType;
+
+      const box = $("contentFields");
+      box.replaceChildren();
+      for (const key of t.fields) {
+        const def = FIELD[key];
+        const wrap = document.createElement("div");
+        if (def.full) wrap.className = "full";
+        const label = document.createElement("label");
+        label.className = "f";
+        label.htmlFor = "pf_" + key;
+        label.textContent = def.label + " ";
+        if (t.required.includes(key)) label.append(Object.assign(document.createElement("b"), { textContent: "*" }));
+        const input = document.createElement(def.type === "textarea" ? "textarea" : "input");
+        if (def.type !== "textarea") input.type = def.type;
+        input.id = "pf_" + key;
+        input.dataset.page = key;
+        input.value = s.page[key] || "";
+        wrap.append(label, input);
+        box.append(wrap);
+      }
+      if (current === "quiz" && !s.page.id) $("pf_id").value = newQuizId();
+
+      for (const el of document.querySelectorAll("[data-bar]")) el.value = s.bar[el.dataset.bar] || "";
+      $("full_screen").checked = !!s.full_screen;
+      $("return_on_close").checked = !!s.return_on_close;
+
+      for (const b of document.querySelectorAll("#modeTabs .tab")) b.setAttribute("aria-selected", String(b.dataset.mode === s.mode));
+      $("manualBox").hidden = s.mode !== "manual";
+      $("linkBox").hidden = s.mode !== "link";
+      $("jsonUrl").value = s.jsonUrl || "";
+      showLinkResult();
+
+      $("quizBox").hidden = current !== "quiz";
+      if (current === "quiz") renderQuestions(s.questions);
+      updatePreview();
+    }
+
+    function showLinkResult(error) {
+      const s = state[current];
+      const ok = !error && s.linked && s.linked.url === s.jsonUrl;
+      $("importLink").hidden = !ok;
+      $("linkMsg").className = error ? "err" : "ok";
+      $("linkMsg").textContent = error ? "❌ " + error : ok ? `✅ ফাইল ঠিক আছে: ${s.linked.json.title}` : "";
+    }
+
+    // Fetches jsonUrl and checks it against this tab's format. Returns the JSON or throws.
+    async function checkLink() {
+      saveForm();
+      const s = state[current], url = s.jsonUrl;
+      s.linked = null;
+      if (!/^https:\/\/\S+$/.test(url)) throw new Error("https:// দিয়ে শুরু হওয়া একটা লিংক দিন");
+      let json;
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) throw new Error(`ফাইলটা পাওয়া যায়নি (HTTP ${r.status})। লিংক ঠিক আছে তো? GitHub-এ দিলে ১-২ মিনিট অপেক্ষা করুন।`);
+        const text = await r.text();
+        try { json = JSON.parse(text); } catch { throw new Error("ফাইলটা ঠিক JSON না। jsonlint.com-এ চেক করুন।"); }
+      } catch (e) {
+        throw e instanceof TypeError ? new Error("লিংকটা খোলা যাচ্ছে না (নেট বা CORS সমস্যা)") : e;
+      }
+      const problem = validateContent(current, json);
+      if (problem) throw new Error("ফাইলের ফরম্যাট ঠিক নেই: " + problem);
+      s.linked = { url, json };
+      return json;
+    }
+
+    function renderQuestions(questions) {
+      const box = $("questions");
+      box.replaceChildren();
+      questions.forEach((q, qi) => {
+        const el = document.createElement("div");
+        el.className = "q";
+        const group = "ans_" + qi + "_" + Math.random().toString(36).slice(2, 7);
+        el.innerHTML = `
+          <div class="q-head"><h2>প্রশ্ন ${qi + 1}</h2><button class="small danger" data-act="delQ">✕ প্রশ্ন মুছুন</button></div>
+          <div class="fields">
+            <div><label class="f">প্রশ্ন (বাংলা) <b>*</b></label><input type="text" data-q="question"></div>
+            <div><label class="f">Question (English) <b>*</b></label><input type="text" data-q="question_en"></div>
+          </div>
+          <label class="f">অপশন — সঠিক উত্তরে টিক দিন <b>*</b></label>
+          <div class="opts"></div>
+          <button class="small" data-act="addOpt">+ অপশন</button>
+          <div class="fields">
+            <div><label class="f">ব্যাখ্যা (বাংলা)</label><input type="text" data-q="explanation"></div>
+            <div><label class="f">Explanation (English)</label><input type="text" data-q="explanation_en"></div>
+          </div>`;
+        for (const k of ["question", "question_en", "explanation", "explanation_en"]) el.querySelector(`[data-q="${k}"]`).value = q[k] || "";
+        const opts = el.querySelector(".opts");
+        q.options.forEach((_, oi) => {
+          const row = document.createElement("div");
+          row.className = "opt";
+          row.innerHTML = `
+            <input type="radio" name="${group}" title="সঠিক উত্তর">
+            <input type="text" data-o="bn" placeholder="অপশন ${oi + 1} (বাংলা)">
+            <input type="text" class="en" data-o="en" placeholder="Option ${oi + 1} (English)">
+            <button class="small danger" data-act="delOpt" title="অপশন মুছুন">✕</button>`;
+          row.querySelector("[type=radio]").checked = q.answer === oi;
+          row.querySelector('[data-o="bn"]').value = q.options[oi] || "";
+          row.querySelector('[data-o="en"]').value = q.options_en[oi] || "";
+          row.querySelector('[data-act="delOpt"]').onclick = () => {
+            const qs = readQuestions();
+            if (qs[qi].options.length <= 2) return show("কমপক্ষে ২টা অপশন লাগবে");
+            qs[qi].options.splice(oi, 1);
+            qs[qi].options_en.splice(oi, 1);
+            if (qs[qi].answer === oi) qs[qi].answer = -1;
+            else if (qs[qi].answer > oi) qs[qi].answer--;
+            renderQuestions(qs);
+            updatePreview();
+          };
+          opts.append(row);
+        });
+        el.querySelector('[data-act="addOpt"]').onclick = () => {
+          const qs = readQuestions();
+          qs[qi].options.push("");
+          qs[qi].options_en.push("");
+          renderQuestions(qs);
+          updatePreview();
+        };
+        el.querySelector('[data-act="delQ"]').onclick = () => {
+          const qs = readQuestions();
+          if (qs.length <= 1) return show("কমপক্ষে ১টা প্রশ্ন লাগবে");
+          qs.splice(qi, 1);
+          renderQuestions(qs);
+          updatePreview();
+        };
+        box.append(el);
+      });
+    }
+
+    function readQuestions() {
+      return [...document.querySelectorAll("#questions .q")].map((el) => {
+        const rows = [...el.querySelectorAll(".opt")];
+        const v = (k) => el.querySelector(`[data-q="${k}"]`).value.trim();
+        return {
+          question: v("question"), question_en: v("question_en"),
+          options: rows.map((r) => r.querySelector('[data-o="bn"]').value.trim()),
+          options_en: rows.map((r) => r.querySelector('[data-o="en"]').value.trim()),
+          answer: rows.findIndex((r) => r.querySelector("[type=radio]").checked),
+          explanation: v("explanation"), explanation_en: v("explanation_en"),
+        };
+      });
+    }
+
+    // DOM → state[current]
+    function saveForm() {
+      const s = state[current];
+      s.page = {};
+      for (const el of document.querySelectorAll("[data-page]")) s.page[el.dataset.page] = el.value;
+      s.bar = {};
+      for (const el of document.querySelectorAll("[data-bar]")) s.bar[el.dataset.bar] = el.value;
+      s.full_screen = $("full_screen").checked;
+      s.return_on_close = $("return_on_close").checked;
+      s.jsonUrl = $("jsonUrl").value.trim();
+      if (current === "quiz") s.questions = readQuestions();
+    }
+
+    // state → the JSON file the app opens
+    function buildContent(type, s) {
+      const t = TYPES[type];
+      const out = {};
+      for (const key of t.fields) {
+        const v = (s.page[key] || "").trim();
+        if (v) out[key] = v;
+      }
+      Object.assign(out, t.extra || {});
+      out.type = t.messageType; // the app also reads the kind from the file
+      if (type === "quiz") {
+        out.questions = s.questions.map((q) => {
+          const o = { question: q.question, question_en: q.question_en, options: q.options, options_en: q.options_en, answer: q.answer };
+          if (q.explanation) o.explanation = q.explanation;
+          if (q.explanation_en) o.explanation_en = q.explanation_en;
+          return o;
+        });
+      }
+      return out;
+    }
+
+    function buildBar(content, s) {
+      const firstLine = (content.description || "").split("\n")[0];
+      const shorten = (txt) => (txt.length > 120 ? txt.slice(0, 117) + "…" : txt);
+      return {
+        title: (s.bar.title || "").trim() || content.title || "",
+        body: (s.bar.body || "").trim() || content.subtitle || shorten(firstLine),
+        image: (s.bar.image || "").trim() || content.image || "",
+      };
+    }
+
+    function buildPayload() {
+      saveForm();
+      const s = state[current], t = TYPES[current];
+      const link = s.mode === "link";
+      const content = link ? (s.linked?.url === s.jsonUrl ? s.linked.json : {}) : buildContent(current, s);
+      const payload = {
+        notification: buildBar(content, s),
+        data: {
+          type: t.messageType,
+          full_screen: String(s.full_screen),
+          return_on_close: String(s.full_screen && s.return_on_close),
+          ...(link ? { json_url: s.jsonUrl } : {}),
+        },
+        ...(link ? {} : { content }),
+      };
+      payload.target = target();
+      const token = $("testToken").value.trim();
+      if (payload.target === "debug" && token) payload.token = token;
+      return payload;
+    }
+
+    // The JSON file's format for one tab (docs/firebase-push-guide.html).
+    function validateContent(type, c) {
+      const t = TYPES[type];
+      if (!c || typeof c !== "object" || Array.isArray(c)) return "JSON-টা একটা { } object হতে হবে";
+      const str = (v) => typeof v === "string" && v.trim() !== "";
+      const missing = t.required.filter((k) => !str(c[k])).map((k) => `${FIELD[k].label} (${k})`);
+      if (missing.length) return "এগুলো লাগবে: " + missing.join(", ");
+      if (t.extra && c.feedback_type !== t.extra.feedback_type) {
+        return `feedback_type "${t.extra.feedback_type}" হতে হবে` + (c.feedback_type ? `, ফাইলে আছে "${c.feedback_type}" — অন্য সাব-ট্যাবটা বাছুন` : "");
+      }
+      if (c.whatsapp && !/^\d{10,15}$/.test(String(c.whatsapp))) return "WhatsApp নম্বর শুধু সংখ্যা, দেশের কোডসহ (8801XXXXXXXXX)";
+      if (type === "quiz") {
+        if (!Array.isArray(c.questions) || !c.questions.length) return "কমপক্ষে ১টা প্রশ্ন (questions) লাগবে";
+        for (const [i, q] of c.questions.entries()) {
+          const n = `প্রশ্ন ${i + 1}: `;
+          if (!q || !str(q.question) || !str(q.question_en)) return n + "বাংলা আর English প্রশ্ন (question, question_en) দুটোই লাগবে";
+          if (!Array.isArray(q.options) || q.options.length < 2) return n + "কমপক্ষে ২টা অপশন লাগবে";
+          if (!Array.isArray(q.options_en) || q.options_en.length !== q.options.length) return n + "options_en-এ options-এর সমান সংখ্যক অপশন লাগবে";
+          if (![...q.options, ...q.options_en].every(str)) return n + "সব অপশনের বাংলা আর English দুটোই লাগবে";
+          if (q.answer === -1) return n + "সঠিক উত্তরে টিক দিন";
+          if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length) return n + "answer ঠিক নেই (প্রথম অপশন = 0)";
+        }
+      }
+      return null;
+    }
+
+    function validate(p) {
+      const s = state[current];
+      if (s.mode === "manual") {
+        const problem = validateContent(current, p.content);
+        if (problem) return problem;
+      }
+      if (!p.notification.title || !p.notification.body) return "Notification title আর text লাগবে (বা উপরের শিরোনাম আর লেখা)";
+      if (p.token !== undefined && p.token.length < 20) return "FCM token-টা পুরো কপি হয়নি";
+      return null;
+    }
+
+    function updatePreview() {
+      const p = buildPayload();
+      $("preview").textContent = JSON.stringify(p, null, 2);
+    }
+
+    function target() {
+      return document.querySelector("input[name=target]:checked").value;
+    }
+
+    // ---------- templates ----------
+
+    function renderTemplates() {
+      const list = $("tplList");
+      list.replaceChildren();
+      if (!templates.length) {
+        list.innerHTML = '<p class="empty">এখনো কোনো template নেই।</p>';
+        return;
+      }
+      for (const tpl of templates) {
+        const type = TYPES[tpl.form?.type];
+        if (!type) continue;
+        const li = document.createElement("li");
+        const strong = document.createElement("strong");
+        strong.textContent = tpl.name;
+        const small = document.createElement("small");
+        small.textContent = type.sub ? `${type.tab} · ${type.sub}` : type.tab;
+        const row = document.createElement("div");
+        row.className = "row";
+        const use = document.createElement("button");
+        use.className = "small";
+        use.textContent = "লোড";
+        use.onclick = () => {
+          saveForm();
+          state[tpl.form.type] = structuredClone(tpl.form.state);
+          if (tpl.form.type === "quiz") state.quiz.page.id = ""; // new quiz, new id
+          current = tpl.form.type;
+          renderTabs();
+          renderForm();
+          show(`"${tpl.name}" লোড হয়েছে`, true);
+        };
+        const del = document.createElement("button");
+        del.className = "small danger";
+        del.textContent = "ডিলিট";
+        del.onclick = async () => {
+          if (!confirm(`"${tpl.name}" ডিলিট করবেন?`)) return;
+          try {
+            await api("/templates/" + encodeURIComponent(tpl.id), { method: "DELETE" });
+            templates = templates.filter((x) => x.id !== tpl.id);
+            renderTemplates();
+          } catch (e) { show("❌ " + e.message); }
+        };
+        row.append(use, del);
+        li.append(strong, small, row);
+        list.append(li);
+      }
+    }
+
+    // ---------- actions ----------
+
+    $("fillSample").onclick = () => {
+      const t = TYPES[current], sample = structuredClone(t.sample);
+      const s = blank(current, state[current].mode);
+      if (s.mode === "link") {
+        if (!SAMPLE_URL[current]) return show("এই ধরনের কোনো sample JSON ফাইল এখনো GitHub-এ নেই। নিজের ফাইলের লিংক দিন, বা “ঘর পূরণ করে” মোডে Sample নিন।");
+        s.jsonUrl = SAMPLE_URL[current];
+      } else {
+        if (sample.questions) { s.questions = sample.questions; delete sample.questions; }
+        s.page = sample;
+      }
+      state[current] = s;
+      renderForm();
+      show("Sample বসানো হয়েছে, দরকারমতো বদলে নিন", true);
+    };
+
+    for (const b of document.querySelectorAll("#modeTabs .tab")) {
+      b.onclick = () => {
+        saveForm();
+        state[current].mode = b.dataset.mode;
+        renderForm();
+      };
+    }
+
+    $("checkLink").onclick = async () => {
+      $("checkLink").disabled = true;
+      $("linkMsg").className = "";
+      $("linkMsg").textContent = "যাচাই হচ্ছে…";
+      try {
+        await checkLink();
+        showLinkResult();
+      } catch (e) {
+        showLinkResult(e.message);
+      } finally {
+        $("checkLink").disabled = false;
+        updatePreview();
+      }
+    };
+
+    // Linked JSON → this tab's fields, to edit and send as a new file.
+    $("importLink").onclick = () => {
+      const s = state[current], json = s.linked?.json;
+      if (!json) return;
+      s.page = {};
+      for (const key of TYPES[current].fields) if (typeof json[key] === "string") s.page[key] = json[key];
+      if (current === "quiz") {
+        s.questions = json.questions.map((q) => ({ ...emptyQuestion(), ...q }));
+        s.page.id = ""; // a new quiz gets a new id
+      }
+      s.mode = "manual";
+      renderForm();
+      show("ফাইলের সব লেখা ঘরে বসানো হয়েছে। পাঠালে নতুন ফাইল হিসেবে যাবে।", true);
+    };
+
+    $("addQ").onclick = () => {
+      const qs = readQuestions();
+      qs.push(emptyQuestion());
+      renderQuestions(qs);
+      updatePreview();
+    };
+
+    $("clear").onclick = () => {
+      if (!confirm("এই ট্যাবের সব ঘর খালি করবেন?")) return;
+      state[current] = blank(current);
+      renderForm();
+      show("", true);
+    };
+
+    $("send").onclick = async () => {
+      if (state[current].mode === "link") {
+        show("JSON ফাইল যাচাই হচ্ছে…", true);
+        try {
+          await checkLink();
+          showLinkResult();
+        } catch (e) {
+          showLinkResult(e.message);
+          return show("❌ " + e.message);
+        }
+      }
+      const p = buildPayload();
+      const problem = validate(p);
+      if (problem) return show("❌ " + problem);
+      const who = p.token ? "শুধু ওই একটা ফোনে" : p.target === "debug" ? "শুধু ডিবাগ ফোনগুলোতে" : "⚠️ Play Store-এর সব ইউজারকে";
+      if (!confirm(`${who} পাঠাবেন?\n\n${p.notification.title}\n${p.notification.body}`)) return;
+      $("send").disabled = true;
+      show("পাঠানো হচ্ছে…", true);
+      try {
+        const out = await api("/send", { method: "POST", body: JSON.stringify(p) });
+        if (current === "quiz") { state.quiz.page.id = ""; $("pf_id").value = newQuizId(); }
+        $("msg").className = "ok";
+        $("msg").replaceChildren(`✅ ${p.target === "debug" ? "ডিবাগ ফোনে" : "সবাইকে"} পাঠানো হয়েছে · JSON: `,
+          Object.assign(document.createElement("a"), { href: out.json_url, target: "_blank", textContent: out.json_url }));
+      } catch (e) {
+        show("❌ " + (e.message.includes("not a valid FCM registration token") || e.message.includes("Requested entity was not found")
+          ? "এই FCM token কাজ করছে না। অ্যাপ থেকে নতুন token কপি করুন।" : e.message));
+      } finally {
+        $("send").disabled = false;
+      }
+    };
+
+    $("saveTpl").onclick = async () => {
+      saveForm();
+      const name = prompt("Template-এর নাম দিন:", state[current].page.title || "");
+      if (!name || !name.trim()) return;
+      try {
+        const form = { type: current, state: structuredClone(state[current]) };
+        const { template } = await api("/templates", { method: "POST", body: JSON.stringify({ name: name.trim(), form }) });
+        templates.push(template);
+        renderTemplates();
+        show("✅ Template সেভ হয়েছে", true);
+      } catch (e) { show("❌ " + e.message); }
+    };
+
+    for (const r of document.querySelectorAll("input[name=target]")) {
+      r.onchange = () => {
+        const debug = target() === "debug";
+        $("tokenBox").hidden = !debug;
+        $("debugHint").hidden = !debug;
+        $("send").textContent = debug ? "📤 ডিবাগ ফোনে পাঠাও" : "📤 সবাইকে পাঠাও";
+        updatePreview();
+      };
+    }
+    $("testToken").value = load("testToken") || "";
+    $("testToken").oninput = () => store("testToken", $("testToken").value.trim() || null);
+    $("send").textContent = "📤 ডিবাগ ফোনে পাঠাও";
+    document.querySelector("#app").addEventListener("input", updatePreview);
+    document.querySelector("#app").addEventListener("change", updatePreview);
+
+    // ---------- login ----------
+
+    async function enter(pw, remember) {
+      password = pw;
+      const data = await api("/templates");
+      templates = data.templates;
+      if (remember) store("adminPw", pw);
+      $("login").hidden = true;
+      $("app").hidden = false;
+      const tab = load("adminTab");
+      if (TYPES[tab]) current = tab;
+      renderTabs();
+      renderForm();
+      renderTemplates();
+    }
+
+    $("loginBtn").onclick = async () => {
+      $("loginMsg").textContent = "";
+      try { await enter($("pw").value, $("remember").checked); }
+      catch (e) { $("loginMsg").textContent = e.status === 401 ? "ভুল পাসওয়ার্ড" : "❌ " + e.message; }
+    };
+    $("pw").onkeydown = (e) => { if (e.key === "Enter") $("loginBtn").click(); };
+    $("logout").onclick = () => { store("adminPw", null); location.reload(); };
+
+    const saved = load("adminPw");
+    if (saved) enter(saved, true).catch(() => { store("adminPw", null); $("login").hidden = false; });
+    else $("login").hidden = false;
+  </script>
+</body>
+</html>

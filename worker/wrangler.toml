@@ -1,0 +1,7 @@
+name = "push-notify"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[[kv_namespaces]]
+binding = "NOTIFY_KV"
+id = "ee1b012df167442081decf98363af4ea" # push-notify-kv
