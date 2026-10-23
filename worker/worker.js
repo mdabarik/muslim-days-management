@@ -7,6 +7,10 @@
 //   Var     ALLOWED_ORIGIN            optional, e.g. https://yourname.github.io (default *)
 
 const TOPIC = "all";
+// Every message carries an analytics label so Firebase → Messaging →
+// Reports can be filtered by it. All of them start with this.
+const LABEL_PREFIX = "muslim-days";
+const LABEL_KINDS = ["notification", "reminder", "feedback-whatsapp", "feedback-email", "quiz"];
 const DEBUG_TOPIC = "debug";
 const SCOPES = "https://www.googleapis.com/auth/firebase.messaging https://www.googleapis.com/auth/cloud-platform";
 
@@ -72,11 +76,12 @@ async function subscribe(request, env) {
 
 // Body: { target: "all" | "debug",
 //         notification: {title, body, image}, data: {type, full_screen, return_on_close, json_url},
+//         label?: one of LABEL_KINDS - the admin page's tab,
 //         content?: object  → stored in KV and sent as json_url,
 //         token?: string    → one phone only, instead of the topic }
 // "debug" is the topic only the app's debug builds join.
 async function send(request, env, origin) {
-  const { target, notification = {}, data = {}, content, token } = await request.json();
+  const { target, notification = {}, data = {}, content, token, label: kind } = await request.json();
   if (!token && target !== "all" && target !== "debug") {
     return json({ error: 'target must be "all" or "debug"' }, 400);
   }
@@ -104,12 +109,14 @@ async function send(request, env, origin) {
     fields.json_url = `${origin}/c/${id}.json`;
   }
 
+  const label = analyticsLabel(kind || data.type, target === "debug" || Boolean(token));
   const sa = serviceAccount(env);
   const message = {
     ...(token ? { token } : { topic: target === "all" ? TOPIC : DEBUG_TOPIC }),
     notification: { title, body, ...(image ? { image } : {}) },
     ...(Object.keys(fields).length ? { data: fields } : {}),
     android: { priority: "high" },
+    fcm_options: { analytics_label: label },
   };
 
   const accessToken = await getAccessToken(env);
@@ -120,7 +127,7 @@ async function send(request, env, origin) {
   });
   const out = await r.json().catch(() => ({}));
   if (!r.ok) return json({ error: out.error?.message || `send failed (${r.status})` }, 502);
-  return json({ ok: true, id: out.name, json_url: fields.json_url || null });
+  return json({ ok: true, id: out.name, json_url: fields.json_url || null, label });
 }
 
 async function getContent(id, env) {
@@ -158,6 +165,18 @@ async function deleteTemplate(id, env) {
 }
 
 // ---------- helpers ----------
+
+/**
+ * muslim-days[-debug]-<kind>-<YYYYMMDD>, e.g. muslim-days-feedback-email-20261024.
+ * Test sends are marked so they stay out of the real numbers. Firebase
+ * allows [a-zA-Z0-9-_.~%], at most 50 characters, and reports at most 100
+ * different labels a day; one per kind per day stays far inside that.
+ */
+function analyticsLabel(kind, debug) {
+  const k = LABEL_KINDS.includes(kind) ? kind : "other";
+  const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  return [LABEL_PREFIX, debug ? "debug" : null, k, day].filter(Boolean).join("-").slice(0, 50);
+}
 
 async function requireAdmin(request, env, handler) {
   const auth = request.headers.get("Authorization") || "";

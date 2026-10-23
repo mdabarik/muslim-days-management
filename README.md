@@ -23,6 +23,7 @@ admin পেজ → Cloudflare Worker (key আর পাসওয়ার্ড
 - প্রতিটা ট্যাবে দুই মোড: **ঘর পূরণ করে** (Worker নিজেই JSON বানিয়ে রাখে) বা **নিজের JSON লিংক** (পাঠানোর আগে গাইডের ফরম্যাটে যাচাই হয়)।
 - **ডিবাগ ফোনে (টেস্ট):** শুধু debug build (`flutter run`) চালানো ফোনে যায় — `debug` topic। **সব ইউজারকে:** `all` topic।
 - Firebase-এ পাঠানো custom data: `json_url`, `type`, `full_screen`, `return_on_close`। (`message_type` নাম Firebase নেয় না।)
+- **Firebase label:** প্রতিটা মেসেজে `analytics_label` যায়: `muslim-days-<ধরন>-<তারিখ>`, যেমন `muslim-days-feedback-whatsapp-20261024`। ধরন: `notification`, `reminder`, `feedback-whatsapp`, `feedback-email`, `quiz`। ডিবাগে পাঠালে `muslim-days-debug-…`, যাতে আসল হিসাবে না মেশে। Firebase → Messaging → **Reports**-এ এই label দিয়ে ফিল্টার করে দেখুন কতগুলো পৌঁছাল আর খোলা হলো (হিসাব আসতে ২৪ ঘণ্টা পর্যন্ত লাগে)।
 
 ## গোপন জিনিস কোথায়
 

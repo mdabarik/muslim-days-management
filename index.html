@@ -559,6 +559,8 @@
         },
         ...(link ? {} : { content }),
       };
+      // The tab, so the Worker can label it for Firebase's reports.
+      payload.label = current;
       payload.target = target();
       const token = $("testToken").value.trim();
       if (payload.target === "debug" && token) payload.token = token;
@@ -751,7 +753,10 @@
         if (current === "quiz") { state.quiz.page.id = ""; $("pf_id").value = newQuizId(); }
         $("msg").className = "ok";
         $("msg").replaceChildren(`✅ ${p.target === "debug" ? "ডিবাগ ফোনে" : "সবাইকে"} পাঠানো হয়েছে · JSON: `,
-          Object.assign(document.createElement("a"), { href: out.json_url, target: "_blank", textContent: out.json_url }));
+          Object.assign(document.createElement("a"), { href: out.json_url, target: "_blank", textContent: out.json_url }),
+          // Firebase → Messaging → Reports filters by this.
+          ...(out.label ? [document.createElement("br"), `🏷️ Firebase label: `,
+            Object.assign(document.createElement("code"), { textContent: out.label })] : []));
       } catch (e) {
         show("❌ " + (e.message.includes("not a valid FCM registration token") || e.message.includes("Requested entity was not found")
           ? "এই FCM token কাজ করছে না। অ্যাপ থেকে নতুন token কপি করুন।" : e.message));
