@@ -1,0 +1,6 @@
+{
+  "name": "muslim-days-push-notifications",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test worker/worker.test.js" }
+}

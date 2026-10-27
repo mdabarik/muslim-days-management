@@ -7,6 +7,11 @@
 //   Var     ALLOWED_ORIGIN            optional, e.g. https://yourname.github.io (default *)
 
 const TOPIC = "all";
+const RETENTION_MS = 60 * 24 * 60 * 60 * 1000;
+const CATEGORIES = ["notification", "reminder", "feedback", "quiz", "fasting", "prayer", "todo", "other"];
+function categoryTopic(kind) {
+  return `category_${["notification", "reminder", "feedback", "quiz"].includes(kind) ? kind : "other"}`;
+}
 // Every message carries an analytics label so Firebase → Messaging →
 // Reports can be filtered by it. All of them start with this.
 const LABEL_PREFIX = "muslim-days";
@@ -28,6 +33,8 @@ export default {
         res = json({ ok: true, service: "push-notify" });
       } else if (url.pathname.startsWith("/c/") && request.method === "GET") {
         res = await getContent(url.pathname.slice(3).replace(/\.json$/, ""), env);
+      } else if (url.pathname === "/inbox" && request.method === "GET") {
+        res = await listInbox(url, env);
       } else if (url.pathname === "/subscribe" && request.method === "POST") {
         res = await subscribe(request, env);
       } else if (url.pathname === "/send" && request.method === "POST") {
@@ -93,7 +100,15 @@ async function send(request, env, origin) {
     return json({ error: "invalid test token" }, 400);
   }
 
-  const fields = {};
+  const category = clean(data.type) || "notification";
+  if (!CATEGORIES.includes(category)) return json({ error: "invalid type" }, 400);
+  const id = crypto.randomUUID();
+  const published = new Date();
+  const expires = new Date(published.getTime() + RETENTION_MS);
+  const fields = {
+    schema_version: "1", message_id: id, type: category,
+    published_at: published.toISOString(), expires_at: expires.toISOString(),
+  };
   // Firebase refuses "message_type" as a key; the app reads "type".
   for (const k of ["json_url", "type", "full_screen", "return_on_close"]) {
     const v = clean(data[k]);
@@ -104,18 +119,27 @@ async function send(request, env, origin) {
       return json({ error: "content must be a JSON object" }, 400);
     }
     // A new file per message: the app downloads a json_url only once.
-    const id = crypto.randomUUID();
-    await env.NOTIFY_KV.put(`content:${id}`, JSON.stringify(content));
+    const versioned = { ...content, published_at: fields.published_at, expires_at: fields.expires_at };
+    if (category === "quiz") {
+      if (!clean(content.id)) return json({ error: "quiz id is required" }, 400);
+      fields.quiz_id = clean(content.id);
+    }
+    await env.NOTIFY_KV.put(`content:${id}`, JSON.stringify(versioned), {
+      expiration: Math.ceil(expires.getTime() / 1000),
+    });
     fields.json_url = `${origin}/c/${id}.json`;
   }
 
+  if (category === "quiz" && !fields.json_url) {
+    return json({ error: "quiz content or json_url is required" }, 400);
+  }
   const label = analyticsLabel(kind || data.type, target === "debug" || Boolean(token));
   const sa = serviceAccount(env);
   const message = {
-    ...(token ? { token } : { topic: target === "all" ? TOPIC : DEBUG_TOPIC }),
+    ...(token ? { token } : { topic: target === "all" ? categoryTopic(category) : DEBUG_TOPIC }),
     notification: { title, body, ...(image ? { image } : {}) },
     ...(Object.keys(fields).length ? { data: fields } : {}),
-    android: { priority: "high" },
+    android: { priority: "high", ttl: "2419200s", notification: { tag: id } },
     fcm_options: { analytics_label: label },
   };
 
@@ -127,16 +151,51 @@ async function send(request, env, origin) {
   });
   const out = await r.json().catch(() => ({}));
   if (!r.ok) return json({ error: out.error?.message || `send failed (${r.status})` }, 502);
-  return json({ ok: true, id: out.name, json_url: fields.json_url || null, label });
+  // Test/token deliveries never enter the public fallback inbox.
+  let syncAvailable = false;
+  if (!token && target === "all") {
+    try {
+      await env.NOTIFY_KV.put(`inbox:${id}`, JSON.stringify({
+        id, at: published.getTime(), published_at: fields.published_at,
+        expires_at: fields.expires_at, title, body, image: image || null,
+        kind: category, schema_version: 1, url_content: fields.json_url || null,
+        quiz_url: category === "quiz" ? fields.json_url : null,
+      }), { expiration: Math.ceil(expires.getTime() / 1000) });
+      syncAvailable = true;
+    } catch (_) {
+      // FCM already accepted: never return a retryable send error that
+      // would duplicate the broadcast merely because fallback storage failed.
+    }
+  }
+  return json({ ok: true, id: out.name, message_id: id, json_url: fields.json_url || null,
+    published_at: fields.published_at, expires_at: fields.expires_at,
+    stage: "fcm_accepted", sync_available: syncAvailable, label });
+}
+
+async function listInbox(url, env) {
+  const page = await env.NOTIFY_KV.list({
+    prefix: "inbox:", limit: 100,
+    ...(url.searchParams.get("cursor") ? { cursor: url.searchParams.get("cursor") } : {}),
+  });
+  const now = Date.now();
+  const items = (await Promise.all(page.keys.map(k => env.NOTIFY_KV.get(k.name, "json"))))
+    .filter(item => item && Date.parse(item.published_at) <= now && Date.parse(item.expires_at) > now)
+    .sort((a, b) => b.at - a.at || a.id.localeCompare(b.id));
+  return new Response(JSON.stringify({ schema_version: 1, server_time: new Date(now).toISOString(),
+    items, cursor: page.list_complete ? null : page.cursor }), {
+    headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+  });
 }
 
 async function getContent(id, env) {
   const text = /^[0-9a-f-]{36}$/.test(id) ? await env.NOTIFY_KV.get(`content:${id}`) : null;
   if (!text) return json({ error: "not found" }, 404);
+  const expiry = Date.parse(JSON.parse(text).expires_at);
+  if (Number.isFinite(expiry) && Date.now() >= expiry) return json({ error: "expired" }, 410);
   return new Response(text, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "Cache-Control": "public, max-age=31536000, immutable",
+      "Cache-Control": "no-store",
     },
   });
 }
