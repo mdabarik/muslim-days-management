@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Muslim Days Management</title>
+  <style>
+    :root { --bg: #f6f7f9; --card: #fff; --text: #1a1d21; --muted: #6b7280; --line: #e5e7eb; --accent: #0f766e; --accent-soft: #ccfbf1; --trello: #0c66e4; --trello-soft: #e9f2ff; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1115; --card: #181b21; --text: #e8eaed; --muted: #9aa0a6; --line: #2a2e36; --accent: #2dd4bf; --accent-soft: #134e4a; --trello: #579dff; --trello-soft: #1c2b41; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, "Noto Sans Bengali", sans-serif; font-size: 15px; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 16px 64px; }
+    h1 { font-size: 24px; margin: 0 0 4px; }
+    h2 { font-size: 18px; margin: 0; }
+    .hint { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .head { display: flex; gap: 12px; align-items: center; }
+    .icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; flex: none; }
+    .card p { color: var(--muted); margin: 0; font-size: 14px; }
+    .links { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+    .links a { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--text); text-decoration: none; }
+    .links a:hover { border-color: var(--accent); }
+    .links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .trello .icon { background: var(--trello-soft); }
+    .trello .links a.primary { background: var(--trello); border-color: var(--trello); }
+    .notify .icon { background: var(--accent-soft); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Muslim Days Management</h1>
+    <p class="hint">টিকেট আর নোটিফিকেশন — সব এক জায়গা থেকে।</p>
+
+    <div class="cards">
+      <section class="card trello">
+        <div class="head"><div class="icon">📋</div><h2>Ticket Management</h2></div>
+        <p>কাজের টিকেট, পরিকল্পনা আর অগ্রগতি Trello-তে।</p>
+        <div class="links">
+          <!-- Trello board link: replace with the team board's URL -->
+          <a class="primary" href="https://trello.com/" target="_blank" rel="noopener">Trello খুলুন <span>↗</span></a>
+        </div>
+      </section>
+
+      <section class="card notify">
+        <div class="head"><div class="icon">🔔</div><h2>Notification System</h2></div>
+        <p>অ্যাপে পাঠানো নোটিফিকেশন দেখুন, নতুন পাঠান।</p>
+        <div class="links">
+          <a href="notifications.html#sent">📤 Sent Notifications <span>→</span></a>
+          <a href="notifications.html#pending">⏳ Pending Notifications <span>→</span></a>
+          <a class="primary" href="send.html">➕ Send New Notification <span>→</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

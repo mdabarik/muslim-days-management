@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Muslim Days Notifications</title>
+  <style>
+    :root { --bg: #f6f7f9; --card: #fff; --text: #1a1d21; --muted: #6b7280; --line: #e5e7eb; --accent: #0f766e; --accent-soft: #ccfbf1; --danger: #dc2626; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1115; --card: #181b21; --text: #e8eaed; --muted: #9aa0a6; --line: #2a2e36; --accent: #2dd4bf; --accent-soft: #134e4a; --danger: #f87171; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, "Noto Sans Bengali", sans-serif; font-size: 15px; }
+    main { max-width: 880px; margin: 0 auto; padding: 20px 16px 64px; }
+    h1 { font-size: 20px; margin: 0; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .linkbtn { padding: 6px 12px; font-size: 13px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; }
+    .linkbtn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+    .tab { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { display: flex; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+    li img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; flex: none; }
+    li strong { display: block; }
+    li p { margin: 2px 0 6px; }
+    li small { color: var(--muted); }
+    .kind { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); font-size: 12px; margin-right: 6px; }
+    .empty { color: var(--muted); font-size: 14px; margin: 0; }
+    .err { color: var(--danger); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top">
+      <h1>Muslim Days · নোটিফিকেশন</h1>
+      <div class="row">
+        <a class="linkbtn" href="./">🏠 হোম</a>
+        <a class="linkbtn primary" href="send.html">➕ Send New Notification</a>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <a class="tab" role="tab" href="#sent" data-view="sent">📤 Sent</a>
+      <a class="tab" role="tab" href="#pending" data-view="pending">⏳ Pending</a>
+    </div>
+
+    <section class="card" id="sent" hidden>
+      <ul id="sentList"><li class="empty">লোড হচ্ছে…</li></ul>
+    </section>
+
+    <section class="card" id="pending" hidden>
+      <p class="empty">কোনো pending নোটিফিকেশন নেই। এখন সব নোটিফিকেশন সাথে সাথে পাঠানো হয়; সময় ঠিক করে পাঠানোর (schedule) ব্যবস্থা এখনো নেই।</p>
+    </section>
+  </main>
+
+  <script src="push-config.js"></script>
+  <script>
+    const API = self.PUSH_CONFIG.workerUrl.replace(/\/$/, "");
+    const KIND = { notification: "🔔 Notification", reminder: "⏰ Reminder", feedback: "💬 Feedback", quiz: "❓ Quiz" };
+
+    function show() {
+      const view = location.hash === "#pending" ? "pending" : "sent";
+      for (const tab of document.querySelectorAll(".tab")) tab.setAttribute("aria-selected", tab.dataset.view === view);
+      document.getElementById("sent").hidden = view !== "sent";
+      document.getElementById("pending").hidden = view !== "pending";
+    }
+    addEventListener("hashchange", show);
+    show();
+
+    function el(tag, props = {}, ...children) {
+      const node = Object.assign(document.createElement(tag), props);
+      node.append(...children);
+      return node;
+    }
+
+    const date = (iso) => new Date(iso).toLocaleString("bn-BD", { dateStyle: "medium", timeStyle: "short" });
+
+    // The Worker's public inbox: everything sent to all users in the last 60 days.
+    async function loadSent() {
+      const list = document.getElementById("sentList");
+      const items = [];
+      try {
+        let cursor = null;
+        do {
+          const r = await fetch(`${API}/inbox${cursor ? `?cursor=${encodeURIComponent(cursor)}` : ""}`, { cache: "no-store" });
+          if (r.status === 404) throw new Error("Worker-এ /inbox এখনো deploy হয়নি");
+          if (!r.ok) throw new Error(`Worker ${r.status}`);
+          const page = await r.json();
+          items.push(...page.items);
+          cursor = page.cursor;
+        } while (cursor);
+      } catch (err) {
+        list.replaceChildren(el("li", { className: "empty err" }, `লোড করা গেল না: ${err.message}`));
+        return;
+      }
+      items.sort((a, b) => b.at - a.at);
+      if (!items.length) {
+        list.replaceChildren(el("li", { className: "empty" }, "গত ৬০ দিনে সব ইউজারকে কোনো নোটিফিকেশন পাঠানো হয়নি।"));
+        return;
+      }
+      list.replaceChildren(...items.map((n) => el("li", {},
+        ...(n.image ? [el("img", { src: n.image, alt: "", loading: "lazy" })] : []),
+        el("div", {},
+          el("strong", {}, n.title),
+          el("p", {}, n.body),
+          el("small", {}, el("span", { className: "kind" }, KIND[n.kind] || n.kind), `${date(n.published_at)} · মেয়াদ ${date(n.expires_at)} পর্যন্ত`),
+        ),
+      )));
+    }
+    loadSent();
+  </script>
+</body>
+</html>

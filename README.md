@@ -1,41 +1,54 @@
-# Muslim Days · Push Notifications
+# Muslim Days Management
 
-Muslim Days অ্যাপে নোটিফিকেশন পাঠানোর admin পেজ।
+Muslim Days টিমের টিকেট আর পুশ নোটিফিকেশন — এক জায়গা থেকে।
 
-- **পেজ:** https://mdabarik.github.io/push-notifications/
-- **গাইড:** https://mdabarik.github.io/push-notifications/guide.html
-- **Worker:** https://push-notify.muslim-days.workers.dev
+**হোম:** https://mdabarik.github.io/push-notifications/
+
+| কার্ড | কী আছে |
+|---|---|
+| 📋 Ticket Management | Trello বোর্ড |
+| 🔔 Notification System | Sent · Pending · Send New Notification |
+
+## ফাইল
 
 ```
-index.html        admin পেজ (GitHub Pages)
-guide.html        পুশ গাইড (muslim-days/docs/firebase-push-guide.html-এর কপি)
-push-config.js    Worker-এর লিংক (পাবলিক)
-worker/           Cloudflare Worker-এর কোড
+index.html           হোম পেজ (দুটো কার্ড)
+notifications.html   Sent / Pending তালিকা
+send.html            নতুন নোটিফিকেশন পাঠানোর admin পেজ
+guide.html           পুশ গাইড
+push-config.js       Worker-এর লিংক (পাবলিক)
+worker/              Cloudflare Worker (push-notify)
+reminders/           রিমাইন্ডারের JSON আর ছবি
 ```
 
 ## কীভাবে কাজ করে
 
 ```
-admin পেজ → Cloudflare Worker (key আর পাসওয়ার্ড এখানে লুকানো) → Firebase → ফোন
+send.html → Cloudflare Worker → Firebase → ফোন
 ```
 
-- ট্যাব: 🔔 Notification · ⏰ Reminder · 💬 Feedback (WhatsApp / Email) · ❓ Quiz। যে ট্যাবে আছেন সেটাই `type` হিসেবে যায়।
-- প্রতিটা ট্যাবে দুই মোড: **ঘর পূরণ করে** (Worker নিজেই JSON বানিয়ে রাখে) বা **নিজের JSON লিংক** (পাঠানোর আগে গাইডের ফরম্যাটে যাচাই হয়)।
-- **ডিবাগ ফোনে (টেস্ট):** শুধু debug build (`flutter run`) চালানো ফোনে যায় — `debug` topic। **সব ইউজারকে:** `all` topic।
-- Firebase-এ পাঠানো custom data: `json_url`, `type`, `full_screen`, `return_on_close`। (`message_type` নাম Firebase নেয় না।)
-- **Firebase label:** প্রতিটা মেসেজে `analytics_label` যায়: `muslim-days-<ধরন>-<তারিখ>`, যেমন `muslim-days-feedback-whatsapp-20261024`। ধরন: `notification`, `reminder`, `feedback-whatsapp`, `feedback-email`, `quiz`। ডিবাগে পাঠালে `muslim-days-debug-…`, যাতে আসল হিসাবে না মেশে। Firebase → Messaging → **Reports**-এ এই label দিয়ে ফিল্টার করে দেখুন কতগুলো পৌঁছাল আর খোলা হলো (হিসাব আসতে ২৪ ঘণ্টা পর্যন্ত লাগে)।
+- **ধরন (ট্যাব):** Notification · Reminder · Feedback · Quiz। ট্যাবটাই `type` হিসেবে যায়।
+- **কাকে:** ডিবাগ ফোন (`debug` topic, টেস্টের জন্য) বা সব ইউজার।
+- **Sent:** সব ইউজারকে পাঠানো নোটিফিকেশন ৬০ দিন থাকে, Worker-এর `/inbox` থেকে আসে।
+- **Pending:** schedule করার ব্যবস্থা এখনো নেই, তাই এখন খালি।
+- **Firebase label:** `muslim-days-<ধরন>-<তারিখ>` (ডিবাগে `muslim-days-debug-…`)। Firebase → Messaging → Reports-এ ফিল্টার করুন।
 
-## গোপন জিনিস কোথায়
+বিস্তারিত: [guide.html](https://mdabarik.github.io/push-notifications/guide.html)
 
-GitHub-এ কোনো গোপন কিছু নেই। Cloudflare → Workers → `push-notify` → Settings → Variables and Secrets:
+## গোপন জিনিস
+
+GitHub-এ কিছু নেই। সব Cloudflare → Workers → `push-notify` → Settings-এ:
 
 | নাম | ধরন | কী |
 |---|---|---|
-| `FIREBASE_SERVICE_ACCOUNT` | Secret | Firebase service account-এর পুরো JSON |
+| `FIREBASE_SERVICE_ACCOUNT` | Secret | Firebase service account JSON |
 | `ADMIN_PASSWORD` | Secret | admin পেজের পাসওয়ার্ড |
-| `NOTIFY_KV` | KV binding | `push-notify-kv` — template আর বানানো JSON |
+| `NOTIFY_KV` | KV | template, কনটেন্ট আর inbox |
 
-## Worker-এর কোড বদলালে
+## Worker আপডেট
 
-Cloudflare → `push-notify` → **Edit code** → সব মুছে `worker/worker.js` পেস্ট → **Deploy**।
-অথবা `worker/` ফোল্ডারে: `npx wrangler deploy`।
+```bash
+cd worker && npx wrangler deploy
+```
+
+টেস্ট: `npm test`
