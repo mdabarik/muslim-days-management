@@ -1,0 +1,19 @@
+Use case: infographic-diagram
+Asset type: polished Bengali Islamic Friday reminder poster for Muslim Days mobile app, square 1536x1536 composition.
+Primary request: Create a beautiful, reverent, exceptionally legible Bengali reminder about reading Surah Al-Kahf on Friday, its virtue, salawat, and dua. Premium editorial design with elegant Bengali typography, generous spacing, disciplined hierarchy, all text exactly spelled.
+Scene/backdrop: rich deep emerald and warm ivory with restrained gold details, subtle Islamic geometric border, soft morning light through a mosque arch. A tasteful small closed Quran on a wooden rehal, with embossed geometric ornament only, no invented Arabic on the cover, no people.
+Composition: big headline at top, a refined central ivory panel with the virtue, two smaller clear sections for deeds and dua underneath. Large legible text, not tiny body type. Overall warm, serene and beautifully balanced.
+Text (verbatim, render only these text blocks):
+"জুমার দিনের স্মরণ"
+"সূরা কাহফ পড়ুন"
+"এক জুমা থেকে পরের জুমা পর্যন্ত নূরের সুসংবাদ"
+"সূত্র: সহিহ আল-জামি, ৬৪৭০"
+"আজকের আমল"
+"বেশি বেশি দরুদ পড়ুন"
+"আল্লাহর কাছে দোয়া করুন"
+"গোসল করুন • মন দিয়ে খুতবা শুনুন"
+"কুরআনের দোয়া"
+"হে আমাদের রব! আপনার পক্ষ থেকে আমাদের রহমত দিন এবং আমাদের কাজ সঠিকভাবে পরিচালনার ব্যবস্থা করে দিন।"
+"সূরা আল-কাহফ • ১৮:১০"
+"Muslim Days"
+Constraints: Bengali text must be grammatically correct and exact with proper conjunct shaping. Do not add Arabic text, date, fake QR codes, additional promises or decorative illegible writing. Do not depict religious figures. Keep plenty of breathing room, strong contrast, tasteful detailed illustration occupying only a modest portion. Opaque background.
