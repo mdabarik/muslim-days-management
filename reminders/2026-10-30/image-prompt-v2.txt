@@ -1,0 +1,17 @@
+Use case: compositing
+Edit target: attached Bengali Muslim Days Friday poster.
+Create a landscape re-layout of this exact design, final aspect ratio strictly 16:9, target 1280x720 pixels. NOT square. Preserve its beautiful emerald, ivory and gold styling, mosque arch morning light, Quran on rehal, geometric ornament, elegant Bengali typography. Re-compose all content for a wide canvas; do not crop the square poster, do not stretch text. Keep text very legible at 1280x720, generous margins. Reduce ornamental illustration area to make room for readable copy. Use a strong full-width headline, virtue as a clear focal block, and compact balanced side-by-side deeds and dua blocks. All listed text must fit inside the canvas without clipping. No date or QR code.
+Exact Bengali text blocks to preserve:
+"জুমার দিনের স্মরণ"
+"সূরা কাহফ পড়ুন"
+"এক জুমা থেকে পরের জুমা পর্যন্ত নূরের সুসংবাদ"
+"সূত্র: সহিহ আল-জামি, ৬৪৭০"
+"আজকের আমল"
+"বেশি বেশি দরুদ পড়ুন"
+"আল্লাহর কাছে দোয়া করুন"
+"গোসল করুন • মন দিয়ে খুতবা শুনুন"
+"কুরআনের দোয়া"
+"হে আমাদের রব! আপনার পক্ষ থেকে আমাদের রহমত দিন এবং আমাদের কাজ সঠিকভাবে পরিচালনার ব্যবস্থা করে দিন।"
+"সূরা আল-কাহফ • ১৮:১০"
+"Muslim Days"
+No additional writing. No invented Arabic. Preserve religious meaning. The only essential change is a polished wide 16:9 re-layout, not changing the approved aesthetic.
